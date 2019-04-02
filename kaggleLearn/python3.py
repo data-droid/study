@@ -72,3 +72,42 @@ print(' '.join(sorted(planet_to_initial.keys())))
 for planet, initial in planet_to_initial.items() :
 	print("{} = {}".format(planet.rjust(10), initial)) # rjust 우측정렬
 
+# Chapter 7 : Working with External Libs
+
+import math
+print(dir(math))
+print("pit to 4 significant digits = {:.4}".format(math.pi))
+print(math.log(32,2))
+
+import math as mt 
+print(mt.pi)
+
+from math import *
+print(pi, log(32,2))
+
+from math import *
+from numpy import * 
+#print(pi, log(32,2)) #TypeError: return arrays must be of ArrayType
+from math import log, pi
+from numpy import asarray
+
+import numpy
+print(dir(numpy.random))
+
+rolls = numpy.random.randint(low=1, high=6, size=10)
+print(rolls)
+print(type(rolls))
+print(dir(rolls))
+print(rolls.mean(), rolls.tolist())
+print(help(rolls.ravel))
+
+#print([3,4,1,2,2,1]+10) # TypeError: can only concatenate list (not "int") to list
+print(rolls, rolls+10, rolls <=3) # numpy는 되지롱!
+
+xlist=[[1,2,3],[2,4,6],]
+x = numpy.asarray(xlist)
+print("xlist = {}\nx =\n{}".format(xlist,x)) 
+
+print(x[1,-1]) # 6
+# print(xlist[1,-1]) # TypeError: list indices must be integers or slices, not tuple
+
