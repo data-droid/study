@@ -7,6 +7,7 @@
 ## KaggleLearn
 * DataVisualization
 * DataVisualization2
+* Intro ML
 * Pandas
 * Python
 ## [todo] Scala
