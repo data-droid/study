@@ -62,3 +62,11 @@ println(f"$name2%s is $height%2.2f meters tall")
 
 s"A\nB"
 raw"A\nB"
+
+// 변수!
+var variable = 10
+val value = 20
+variable = 30
+//value = 30 # Error reassignment to val
+
+
