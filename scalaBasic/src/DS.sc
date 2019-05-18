@@ -69,4 +69,48 @@ val value = 20
 variable = 30
 //value = 30 # Error reassignment to val
 
-
+// 함수!
+def add(x: Int, y: Int): Int = {
+  return x + y
+}
+add(3,5)
+def add(x: Int): Int = {
+  //x = 10 #immutable var
+  var y = 10
+  y
+}
+add(3)
+def add(x: Int, y: Double) = {
+  x + y
+}
+add(3,4.0)
+def add(x:Int, y: Int) = {
+  println(x + y)
+}
+add(3,3)
+// 축약형
+def add(x:Int, y: Int):Int = return x + y
+add(40,60)
+// 파라미터 기본값
+def add(x:Int, y: Int=10): Unit = println(x+y)
+add(3)
+// 가변 길이 파라미터
+def sum(num:Int*) = num.reduce(_+_)
+sum(1,2,3,4,5)
+// 변수에 함수 결과 할당
+val random1 = Math.random()
+var random2 = Math.random()
+def random3 = Math.random()
+println(random1-random1)
+println(random2-random2)
+println(random3-random3)
+// 함수 중첩
+def run(): Unit = {
+  def middle(): Unit = {
+    println("middle")
+  }
+  println("Start")
+  middle()
+  println("End")
+}
+run

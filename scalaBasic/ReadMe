@@ -68,3 +68,26 @@
 * val : 불변 변수 ( 재할당 불가능 ! ), 동시 처리!!
    
 ### 함수
+* 특징
+    * def 로 선언
+    * 리턴문과 리턴 타입 생략이 가능함.
+    * 매개변수의 파라미터 타입은 생략 불가!
+    * 리턴값이 없는 경우 Unit
+    * 매개변수는 immutable 변수임! 수정불가!
+    * 리턴 타입이 Unit이 아닌 경우 마지막 값을 리턴!
+* 축약형
+    * 1라인으로 처리 가능한 경우 중괄호 없이 선언 가능!
+    * def printUpper(message:String):Unit = println(message.toUpperCase())
+    * def printLower(message:String) = println(message.toLowerCase())
+* 파라미터 default
+    * def add(x: Int, y: Int=10): Unit = println(x+y)
+* 가변 길이 파라미터
+    * \*을 이용하면 Seq형으로 변환되어 입력
+    * def sum(num:Int\*) = num.reduce( _ + _ )
+* 변수에 함수 결과 할당
+    * val, var는 호출할 때마다 같은 값 반환
+    * def는 호출할 때마다 다른 값 반환
+    * val random1 = Math.random()
+    * var random2 = Math.random()
+    * def random3 = Math.random()
+* 함수 내 다른 함수를 선언할 수 있음!
