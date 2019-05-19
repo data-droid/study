@@ -114,3 +114,27 @@ def run(): Unit = {
   println("End")
 }
 run
+
+// lambda funtion
+def exec(f:(Int,Int)=> Int, x:Int, y:Int) = f(x,y)
+exec((x:Int, y:Int)=>x+y,2,3)
+exec((x,y)=>x+y,2,3)
+exec(_+_,2,3)
+
+// 커링
+def modN(n:Int)(x:Int) = ((x%n)==0)
+def modOne:Int => Boolean = modN(1)
+def modTwo = modN(2) _
+println(modOne(4))
+println(modTwo(4))
+println(modTwo(5))
+
+// 클로져
+def divide(n:Int) = (x:Int) => (x/n)
+def divideFive = divide(5)
+println(divideFive(10))
+var factor =10
+def multiplier = (x:Int) => x*factor
+println(multiplier(4))
+factor =100
+println(multiplier(4))
