@@ -187,3 +187,55 @@ var p4 = new Person3(age=29)
 class PersonMethod(name:String, age:Int) {
   def greeting() = println(s"${name} is ${age} old")
 }
+
+// method override
+class PersonOverride(name:String, age:Int, val job:String) {
+  def greeting() = println(s"${name} is ${age} old")
+  def work() = println(s"${name} is ${job}")
+}
+
+class Writer(name:String, age:Int) extends PersonOverride(name, age,"") {
+  override def work() = println(s"${name} is writer")
+}
+var w = new PersonOverride("david",25, "writer")
+w.greeting()
+w.work()
+val po = new PersonOverride("David",15,"Students") {
+  override def work() = println(s"${name} is ${job}")
+}
+po.greeting()
+po.work()
+
+// 생성자
+class Person4(name:String, age:Int) {
+  def greeting() = println(s"${name} is ${age} old")
+  println("created!")
+}
+val pc = new Person4("David",15)
+
+// extends and abstract
+abstract class Person5(name:String, age:Int) {
+  def work
+  def status(str: String)
+  def greeting() = println(s"${name} is ${age} old")
+}
+class Player(name: String, age: Int) extends Person5(name,age) {
+  def work = println("Working!")
+  def status(str:String) = println(s"${str}!!")
+}
+var pa = new Player("jay", 29)
+pa.work
+pa.status("Wake up")
+
+// Case Class
+case class Person6(name:String, age:Int)
+var pcase = Person6("Jay", 29)
+pcase.name
+// pcase.name = "jay2" // Error : 불변데이터!!
+var pcase2 = Person6("Jay",29)
+var pcase3 = Person6("Jayk",29)
+pcase == pcase2
+pcase2 == pcase3
+// 자동 코드 생성 toString, hashCode ...
+pcase.toString()
+pcase.hashCode()

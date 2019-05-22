@@ -131,4 +131,40 @@
         * 기본, 변수, 상수 모두 기본값 설정 가능.
 * 클래스의 메소드
     * 함수와 마찬가지로 def로 선언
-    * 
+    * override 선언자를 통해 오버라이드 가능.
+    * new 를 이용하여 클래스 생성시 오버라이드하여 매소스 재정의 가능.
+* 생성자
+    * 생성자가 따로 존재하지 않음.
+* 상속과 추상 클래스
+    * extends
+        * 일반 클래스, 추상클래스 모두 상속 가능.
+    * abstract
+        * 매개변수를 가질 수 있음.
+        * 메소드 선언만 하고 자식 클래스에서 구현 가능.
+        * 기본 메소드를 구현 가능.
+* Sealed Class
+    * 하위 타입이 모두 한파일에 있어야 함.
+    * 관련 클래스를 한파일에 모두 입력하게 강제할 수 있어 관리 효율성이 높아짐.
+    * sealed를 이용하고 trait도 봉인 가능
+    * file1.scala
+        * sealed abstract class Furniture
+        * case class Couch() extends Furniture
+        * case class Chair() extends Furniture
+    * file2.scala
+        * case class Desk() extends Furniture
+        * sealed class를 생성하고 다른 파일에서 클래스 선언시 illegal inheritance from sealed class Furniture 오류 발생!
+* case Class       
+    * 일반 클래스와 달리 인스턴스를 생성할 때 new를 사용하지 않음.
+    * 불변 데이터
+        * 멤버변수는 기본적으로 불변 변수로 선언.
+    * 패턴 매칭
+        * 자바의 case와 유사하지만 더 강력함.
+    * 데이터 비교
+        * 케이스 클래스의 비교는 참조값을 이용하지 않고, 멤버변수의 데이터를 이용해 처리.
+    * 초기화가 간단함
+        * new를 이용하지 않고 초기화 가능.
+        * var p = Person("A", 10)
+    * 자동 코드 생성
+        * toString, hashCode, equals를 자동으로 생성.
+        * 새로운 복제 객체를 리턴하는 copy() 메서드를 자동으로 생성.
+        
