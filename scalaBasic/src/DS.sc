@@ -138,3 +138,52 @@ def multiplier = (x:Int) => x*factor
 println(multiplier(4))
 factor =100
 println(multiplier(4))
+
+// Type
+def sample[K](key:K): Unit = {
+  println(key)
+}
+def sample2 = sample[String] _
+sample2("Hello")
+
+// Class
+class Person(name:String, age:Int)
+val p = new Person("Jay", 29)
+class A
+
+// Class Variables
+// 기본
+class Animal(name: String) {
+  println(s"${name} Created!")
+}
+// 가변
+class Dog(var name: String) {
+  println(s"${name} Created!!")
+}
+// 불변
+class Cat(val name: String) {
+  println(s"${name} Created!!!")
+}
+var ani = new Animal("animals")
+var dog = new Dog("dogs")
+val cat = new Cat("Cats")
+// println(ani.name) // getter 가 없어서 못읽어요 ㅠㅠ
+println(dog.name)
+println(cat.name)
+dog.name = "dogs2"
+// cat.name = "cats2"  // setter가 없어서 안되요!!
+
+// default var
+class Person1(name:String, age:Int)
+class Person2(var name:String, var age:Int=10)
+class Person3(val name:String="Jay", val age:Int)
+var p1 = new Person1("Jay",29)
+var p2 = new Person2("Jay")
+var p3 = new Person3("JayK",29)
+//var p4 = new Person3(12) // name에 기본값을 입력할 수 없어서 오류!
+var p4 = new Person3(age=29)
+
+// class method
+class PersonMethod(name:String, age:Int) {
+  def greeting() = println(s"${name} is ${age} old")
+}
