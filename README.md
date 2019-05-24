@@ -10,6 +10,6 @@
 * Intro ML
 * Pandas
 * Python
-## [todo] Scala
+## ScalaBasic
 ## [todo] Spark
 ## [todo] DB
