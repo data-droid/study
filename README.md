@@ -8,8 +8,10 @@
 * DataVisualization
 * DataVisualization2
 * Intro ML
+* Intermediate ML
+* [..ing] Deep Learning
 * Pandas
 * Python
-## [todo] Scala
+## [..ing] ScalaBasic
 ## [todo] Spark
 ## [todo] DB
