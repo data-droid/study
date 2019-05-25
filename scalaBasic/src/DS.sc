@@ -239,3 +239,67 @@ pcase2 == pcase3
 // 자동 코드 생성 toString, hashCode ...
 pcase.toString()
 pcase.hashCode()
+
+// 패턴 매칭
+def matching(x:Int): String = x match {
+  case 0 => "Zero"
+  case 1 => "One"
+  case 2 => "Two"
+  case _ => "Default"
+}
+matching(1)
+matching(4)
+matching('a')
+// case class matching
+abstract class Notification
+case class Email(sender: String, title: String, body: String) extends Notification
+case class SMS(caller: String, message: String) extends Notification
+case class VoiceRecording(contactName: String, link: String) extends Notification
+def showNotification(notification: Notification): String = {
+  notification match {
+      // body는 반환값에 사용하지 않기 때문에 _로 처리가능
+    case Email(email, title, _) => s"You got an email from ${email} with title: ${title}"
+    case SMS(number, message) => s"You got a SMS from ${number}! Message:${message}"
+    case VoiceRecording(name, link) => s"You received a Voice Recording from $name! Click the link to hear it : $link"
+  }
+}
+val email = Email("jaekyung.dev@gmail.com","Hello","I hame a Question")
+val someSMS = SMS("010-0101-0101", "Where Are You?")
+val someVoiceRecording = VoiceRecording("Jay","jaekyung.dev")
+println(showNotification(email))
+println(showNotification(someSMS))
+println(showNotification(someVoiceRecording))
+// 케이스 클래스 매칭 패턴 가드
+def showImportantNotification(notification: Notification, importantPeopleInfo: Seq[String]): String = {
+  notification match {
+    // importantPeopleInfo에 같은 이메일이 존재시!
+    case Email(email,_,_) if importantPeopleInfo.contains(email) => "You got an email from special someone!"
+    // importantPeopleInfo에 같은 번호가 존재시!
+    case SMS(number,_) if importantPeopleInfo.contains(number) => "You got a SMS from special someone!"
+    // 아니면 showNotification 호출!
+    case other => showNotification(other)
+  }
+}
+val importantPeopleInfo = Seq("010-0101-0102","jaekyung.dev2@gmail.com")
+val importantEmail = Email("jaekyung.dev2@gmail.com","Drinks?","Food?")
+val importantSMS = SMS("010-0101-0102","I'm here! Where are you?")
+println(showImportantNotification(someSMS, importantPeopleInfo))
+println(showImportantNotification(someVoiceRecording, importantPeopleInfo))
+println(showImportantNotification(importantEmail,importantPeopleInfo))
+println(showImportantNotification(importantSMS, importantPeopleInfo))
+// 클래스 타입 매칭
+abstract class Device
+case class Phone(model: String) extends Device {
+  def screenOff = "Turning screen off"
+}
+case class Computer(model: String) extends Device {
+  def screenSaverOn = "Turning screen saver on..."
+}
+def goIdle(device: Device) = device match {
+  case p: Phone => p.screenOff
+  case c: Computer => c.screenSaverOn
+}
+val phone = Phone("IPhone")
+val computer = Computer("Macbook")
+println(goIdle(phone))
+println(goIdle(computer))
