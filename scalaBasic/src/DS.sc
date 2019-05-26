@@ -303,3 +303,113 @@ val phone = Phone("IPhone")
 val computer = Computer("Macbook")
 println(goIdle(phone))
 println(goIdle(computer))
+
+// 믹스인 컴포지션
+abstract class A {
+  val message:String
+}
+class B extends A {
+  val message = "I'm an instance of class B"
+}
+trait C extends A {
+  def loudMessage = message.toUpperCase()
+}
+class D extends B with C
+val mix = new D
+println(mix.message)
+println(mix.loudMessage)
+
+// Trait
+trait Machine {
+  val serialNumber: Int = 1
+  def work(message: String)
+}
+trait KrMachine {
+  var conturyCode: String = "kr"
+  def print() = println("Korean!")
+}
+class Computer2(location:String) extends Machine with KrMachine {
+  this.conturyCode = "us"
+  def work(message: String) = println(message)
+}
+class Car(location:String) extends Machine with KrMachine {
+  def work(message: String) = println(message)
+  override def print() = println("Driving")
+}
+var machine = new Computer2("Laptop")
+var car = new Car("Sonata")
+machine.work("Coumputing")
+machine.print()
+println(machine.conturyCode)
+car.work("driving...")
+car.print()
+println(car.conturyCode)
+
+// 싱글톤 객체
+object Bread {
+  val name: String = "Basic Bread"
+  def cooking() = println("Baking...")
+}
+import Bread.cooking // import를 이용한 접근
+cooking
+Bread.cooking  // 직접 접근
+// 컴패니언
+class Dog2
+object  Dog2 { // class와 같은 이름으로 object 생성
+  def bark = println("bark") // 정적 메소드 저장.
+}
+Dog2.bark
+// 컴패니언을 이용한 팩토리 예제!
+class Email2(val username: String, val domainName: String)
+object Email2 {
+  def fromString(emailString:String): Option[Email2] = {
+    emailString.split('@') match {
+      case Array(a,b) => Some(new Email2(a,b)) // @로 나눠지면 Email 객체 생성
+      case _ => None
+    }
+  }
+}
+val scalaCenterEmail = Email2.fromString("scala.centor@epfl.ch")
+scalaCenterEmail match {
+  case Some(email) => println(
+    s"""Registered an email
+       |Username: ${email.username}
+       |Domain name: ${email.domainName}
+     """.stripMargin)
+  case None => println("Error: could not parse email")
+}
+
+// for
+for (x <- 0 to 10 if x%2==0)
+  println(x)
+for (x <- 0 to 2; y <- 0 to 2; if x!=y)
+  println(x,y)
+val strs = Array("A", "B", "C", "D", "E")
+for((value, index) <- strs.zipWithIndex)
+  println(value, index)
+def fives(n: Int) = {
+  for (x <- 0 to n; if x%5==0)
+    yield x //시퀀스 output
+}
+for(num <- fives(50))
+  println(num)
+def checkSum(num: Int, sum: Int) = {
+  for (
+    start <- 0 until num;
+    inner <- start until num if start + inner == sum
+  ) yield (start, inner);
+}
+checkSum(20,32) foreach {
+  case(i,j) =>
+    println(s"($i,$j)")
+}
+var i2 = 0;
+do {
+  println(i2)
+  i2+=1
+} while (i2<3)
+var i3 = 0;
+while(i3<3) {
+  println(i3)
+  i3+=1
+}

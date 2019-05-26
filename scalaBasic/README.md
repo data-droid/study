@@ -113,7 +113,7 @@
 #### 타입
 * 타입(T)를 이용해 클래스와 함수를 제너릭하게 생성 가능.
 
-#### 클래스
+### 클래스
 * 멤버 변수 선언 및 생략 가능
     * class Person(name:String, age:Int) //선언
     * val p = new Person("Jay", 29) // 생성
@@ -153,22 +153,141 @@
     * file2.scala
         * case class Desk() extends Furniture
         * sealed class를 생성하고 다른 파일에서 클래스 선언시 illegal inheritance from sealed class Furniture 오류 발생!
-* case Class       
-    * 일반 클래스와 달리 인스턴스를 생성할 때 new를 사용하지 않음.
-    * 불변 데이터
-        * 멤버변수는 기본적으로 불변 변수로 선언.
-    * 패턴 매칭
-        * 자바의 case와 유사하지만 더 강력함.
-    * 데이터 비교
-        * 케이스 클래스의 비교는 참조값을 이용하지 않고, 멤버변수의 데이터를 이용해 처리.
-    * 초기화가 간단함
-        * new를 이용하지 않고 초기화 가능.
-        * var p = Person("A", 10)
-    * 자동 코드 생성
-        * toString, hashCode, equals를 자동으로 생성.
-        * 새로운 복제 객체를 리턴하는 copy() 메서드를 자동으로 생성.
+#### Case Class       
+* 일반 클래스와 달리 인스턴스를 생성할 때 new를 사용하지 않음.
+* 불변 데이터
+    * 멤버변수는 기본적으로 불변 변수로 선언.
 * 패턴 매칭
-    * 자바의 switch 문과 유사하지만, 기본 자료형외에 케이스 클래스를 이용한 처리 가능.
-    * param의 값이 value1의 값과 비교되어 일치하는 값의 결과를 반환.
-    * 언더바(_)는 일치하지 않을 때 처리 결과를 출력.
-     
+    * 자바의 case와 유사하지만 더 강력함.
+* 데이터 비교
+    * 케이스 클래스의 비교는 참조값을 이용하지 않고, 멤버변수의 데이터를 이용해 처리.
+* 초기화가 간단함
+    * new를 이용하지 않고 초기화 가능.
+    * var p = Person("A", 10)
+* 자동 코드 생성
+    * toString, hashCode, equals를 자동으로 생성.
+    * 새로운 복제 객체를 리턴하는 copy() 메서드를 자동으로 생성.
+#### 패턴 매칭
+* 자바의 switch 문과 유사하지만, 기본 자료형외에 케이스 클래스를 이용한 처리 가능.
+* param의 값이 value1의 값과 비교되어 일치하는 값의 결과를 반환.
+* 언더바(_)는 일치하지 않을 때 처리 결과를 출력.
+#### 믹스인 컴포지션
+* 클래스와 트레잇을 상속할 때 서로 다른 부모의 변수, 메소드를 섞어서 새로 정의.
+### 트레잇 (trait)
+* 자바의 인터페이스와 유사.
+* 메소드를 정의만 할 수도, 기본 구현을 할 수도 있음.
+* 추상 클래스와 달리 생성자 파라미터는 가질 수 없음!
+* 가변, 불변 변수 모두 선언 가능.
+* 기본 메소드는 상속되고, override를 통한 메소드 재정의 가능
+* extends로 상속하고 여러개의 트레잇을 with 키워드로 동시에 구현 가능
+* 상속하여 구현하기 때문에 추상클래스와 유사하지만 멤버변수를 가질 수 없음.
+* 추상 클래스는 하나만 상속 가능하지만, 트레잇은 여려개를 상속 가능.
+* 생성자 멤버변수가 필요하면 추상클래스!, 멤버 변수가 필요없으면 트레잇!
+### 싱글톤 객체
+* object 선언자로 싱글톤 객체 생성
+* 메서드는 전역적으로 접근하고 참조 가능
+* 직접 접근 or import 선언.
+* 컴패니언
+    * 싱글톤 객체와 클래스가 같은 이름인 경우
+    * 정적 메소드의 보관 장소를 제공
+    * 자바의 static을 이용한 정적 데이터는 컴패니언을 이용하여 처리.
+    * 팩토리 메소드 같은 정적 메소드는 컴패니언을 이용하여 작성.
+    * 일반적인 데이터는 클래스를 이용하여 정적 데이터와 분리!
+### 콜렉션
+* 배열
+    * 길이가 고정된 자료구조
+    * 선언 : val array1 = Array(1,2,3)
+    * 접근 : array1(0)
+    * 변경 : array1(0) = 10
+    * 배열 연결 : val array2 = array1 ++ array1
+    * 데이터 추가
+        * val array3 = 0 +: array2
+        * val array4 = array2 :+ 100
+* 리스트
+    * 가변 길 데이터를 저장
+    * 선언 
+        * val list1 = list(1,2,3,4)
+        * val list2 = (1 to 100).toList
+        * val list3 = array1.toList
+    * 접근 
+        * list1(0)
+        * list1.head
+        * list1.tail
+* 셋(set)
+    * 중복을 허용하지 않는 자료구조
+    * 선언 : val s1 = Set(1,1,2) // Set(1,2)
+    * 값 유무 확인
+        * s1(1) // true
+        * s1(3) // false
+* 튜플(tuple)
+    * 불변의 데이터를 저장
+    * 선언 : val hostPort = ("localhost", 80)
+    * 접근 : hostPort._1 // localhost
+* 맵(map)
+    * 사전 형식으로 데이터 저장
+    * return이 Option 타입
+    * getOrElse를 이용하거나, get 반환값 Option을 패턴매칭을 이용하는게 좋음.
+    * 선언
+        * val map1 = Map(1->2)
+        * val map2 = Map("foo"->"bar")
+    * Option 타입 반환
+        * map1.get(1) // Option[Int] = Some(2)
+    * 키와 일치하는 데이터가 없으면 기본값 반환
+        * map1.getOrElse(1,0) // 2
+        * map1.getOrElse(10,0) // 0
+#### 반복문
+* for
+    * for (num <- 0 to 3) //to는 이하
+    * for (num <- 0 until 3) // until은 미만
+    * for (str <- Array("A","B","C"))
+    * for (index <- 0 until strs.length)
+    * for ((value, index) <- strs.zipWithIndex)
+    * for ((k,v) <- Map("k1"->"v1","k2"->"v2","k3"->"v3"))
+    * for (x <- 0 to 2; y <- 0 to 3)
+    * for (x <- 0 to 10; if x%2)
+* do..while
+    * val i=0; do { i+=1 } while (i<3)
+* while
+    * val i=0; while(i<3) { i+=1 }
+#### sort, group, filter functions
+* map
+    * 콜렉션의 각 아이템에 대해 동일 작업을 시행
+    * var list = (1 to 10)
+    * list.map(_+1) //list 각 아이템에 +1
+    * val strs = List("david", "kevin", "james")
+    * strs.map(_.toUpperCase) // 대문자로~
+* reduce, fold
+    * 콜렉션의 아이템을 집계할 때 사용.
+    * fold는 기본값(초기값)을 제공할 수 있음.
+    * 각 함수모두 left, right 방향을 가질 수 있음.
+    * val list = (1 to 10)
+    * list.reduce(\_+\_) // 55
+    * list.reduceLeft(\_+\_) // 55
+    * list.reduceRight(\_+\_) // 55
+    * list.reduce(\_-\_) // -53
+    * list.reduceLeft(\_-\_) // -53
+    * list.reduceRight(\_-\_) // -5
+    * list.fold(10)(\_+\_) // 65
+* groupBy
+    * 데이터를 키 기준으로 병합.
+    * 결과를 Map 형식으로 반환
+    * 전달된 키와 벨류를 리스트 형식으로 반환
+    * var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))
+    * datas.groupby(\_.\_1).foreach({case(k,v} => printf("key: %s, value: %s\m", k, v) })
+* filter
+    * 데이터를 필터링하여 없애거나 분류함
+    * partition : 분류할 때 사용.
+    * find : 데이터를 검색할 때
+    * takeWhile, dropWhile을 이용하여 원하는 부분까지 데이터 선택
+    * val list = (1 to 10)
+    * list.filter(\_ > 5) // 5 이상 만
+    * list.partition(\_ % 2 == 0) // 홀수, 짝수 데이터 분리
+    * list.find(\_ == 3) // 3을 검색
+    * val list2 = List(1,2,3,-1,4,5,6)
+    * list2.takeWhile(\_>0) // 1,2,3
+    * list2.dropWhile(\_<0) // -1,4,5,6
+* zip
+    * 두개의 콜렉션을 같은 인덱스의 데이터로 묶음.
+    * 길이가 다르면 작은 것 기준.
+    * for ( item <- List(1,2,3).zip(List(1,2,3))) // (1,1),(2,2),(3,3)
+* mapValues
