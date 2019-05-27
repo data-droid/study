@@ -413,3 +413,52 @@ while(i3<3) {
   println(i3)
   i3+=1
 }
+// map
+var list = (1 to 10)
+list.map(_+1) //list 각 아이템에 +1
+val strs2 = List("david", "kevin", "james")
+strs2.map(_.toUpperCase) // 대문자로~
+// reduce, fold
+list.reduce(_+_) // 55
+list.reduceLeft(_+_) // 55
+list.reduceRight(_+_) // 55
+list.reduce(_-_) // -53
+list.reduceLeft(_-_) // -53
+list.reduceRight(_-_) // -5
+list.fold(10)(_+_) // 65
+// groupBy
+var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))
+datas.groupBy(_._1).foreach({case(k,v) => printf("key: %s, value: %s\n", k, v) })
+// filter
+list.filter(_ > 5) // 5 이상 만
+list.partition(_ % 2 == 0) // 홀수, 짝수 데이터 분리
+list.find(_ == 3) // 3을 검색
+val list2 = List(1,2,3,-1,4,5,6)
+list2.takeWhile(_>0) // 1,2,3
+list2.dropWhile(_<0) // -1,4,5,6
+// zip
+for ( item <- List(1,2,3).zip(List(1,2,3)))// (1,1),(2,2),(3,3)
+  println(item)
+// mapValues
+var maps = Map("A" -> 1, "B" -> 2, "C" -> 3, "D" -> 4, "E" -> 5)
+maps.mapValues(x=>x*x).foreach(x=>x match {case(k,v) => printf("key: %s, value: %s\n",k,v)})
+var maps = Map("A" -> List(1, 2, 3), "B" -> List(4, 5, 6), "C" -> List(7, 8, 9))
+maps.mapValues(_.sum).foreach({case(k,v)=>printf("key: %s, value: %s\n",k,v)})
+// sort
+val list = List(4,6,1,6,0)
+list.sorted // 0,1,4,6,6
+list.sorted(Ordering.Int.reverse) // 6,6,4,1,0
+val sList = List ("aa","bb","cc")
+sList.sortBy(_.charAt(0)) // "aa","bb","cc"
+list.sortWith(_ <= _) // 0,1,4,6,6
+list.sortWith(_ >= _) // 6,6,4,1,0
+
+case class Person(index:Int, var correct:Int)
+
+val persons = Array(Person(1,3),Person(2,4),Person(3,4))
+val list =persons.sortWith((x:Person, y:Person) => {
+  if(x.correct == y.correct)
+    x.index >= y.index
+  x.correct > y.correct
+}).toList
+println(list)

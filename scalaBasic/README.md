@@ -273,7 +273,7 @@
     * 결과를 Map 형식으로 반환
     * 전달된 키와 벨류를 리스트 형식으로 반환
     * var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))
-    * datas.groupby(\_.\_1).foreach({case(k,v} => printf("key: %s, value: %s\m", k, v) })
+    * datas.groupBy(\_.\_1).foreach({case(k,v) => printf("key: %s, value: %s\n", k, v) })
 * filter
     * 데이터를 필터링하여 없애거나 분류함
     * partition : 분류할 때 사용.
@@ -291,3 +291,17 @@
     * 길이가 다르면 작은 것 기준.
     * for ( item <- List(1,2,3).zip(List(1,2,3))) // (1,1),(2,2),(3,3)
 * mapValues
+    * Map에서 벨류만 map 함수 처리하고 싶을 때 사용
+    * var maps = Map("A" -> 1, "B" -> 2, "C" -> 3, "D" -> 4, "E" -> 5)
+    * maps.mapValues(x=>x*x).foreach(x=>x match {case(k,v) => printf("key: %s, value: %s\n",k,v)})
+    * var maps = Map("A" -> List(1, 2, 3), "B" -> List(4, 5, 6), "C" -> List(7, 8, 9))
+    * maps.mapValue(\_.sum).foreach({case(k,v)=>printf("key: %s, value: %s\n",k,v)})
+* sort
+    * sorted, sortwith, sortBy
+    * val list = List(4,6,1,6,0)
+    * list.sorted // 0,1,4,6,6
+    * list.sorted(Ordering.Int.reverse) // 6,6,4,1,0
+    * val sList = List ("aa","bb","cc")
+    * sList.sortBy(\_.charAt(0)) // "aa","bb","cc"
+    * list.sortWith(\_ <= \_) // 0,1,4,6,6
+    * list.sortWith(\_ >= \_) // 6,6,4,1,0
