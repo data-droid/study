@@ -12,6 +12,6 @@
 * [..ing] Deep Learning
 * Pandas
 * Python
-## [..ing] ScalaBasic
+## ScalaBasic
 ## [todo] Spark
 ## [todo] DB
