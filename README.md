@@ -3,7 +3,7 @@
 * Jump2Python [ref](https://wikidocs.net/book/1)
 * NumPyBasic [ref](www.DataCamp.com)
 ## PythonDataScience
-* 
+## handson ML
 ## KaggleLearn
 * DataVisualization
 * DataVisualization2
