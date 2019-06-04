@@ -30,11 +30,11 @@
     * 함수의 실행이 외부에 영향을 끼치지 않는 함수.(병렬 계산이 가능!)
 * 익명 함수(Anonymous Function)
     * 함수 선언 없이 익명 함수를 생성하여 코드 길이를 줄임.
-    * Arrays.asList(1,2,3).stream().reduce((a,b)->a-b).get()
+    `Arrays.asList(1,2,3).stream().reduce((a,b)->a-b).get()`
 * 고차 함수(Higher-Order Function)
     * 함수를 인수로 취급하는 함수.
     * 함수를 입력 파라미터나 출력 값으로 처리.
-    * Collection.sort(new ArrayList<Integer>(), (x,y) -> x>=y? -1:1);
+    * `Collection.sort(new ArrayList<Integer>(), (x,y) -> x>=y? -1:1)`
     
  ### 객체
 * 기본 자료형, 함수, 클래스 모두 객체로 취급.
@@ -77,33 +77,35 @@
     * 리턴 타입이 Unit이 아닌 경우 마지막 값을 리턴!
 * 축약형
     * 1라인으로 처리 가능한 경우 중괄호 없이 선언 가능!
-    * def printUpper(message:String):Unit = println(message.toUpperCase())
-    * def printLower(message:String) = println(message.toLowerCase())
+    * `def printUpper(message:String):Unit = println(message.toUpperCase())`
+    * `def printLower(message:String) = println(message.toLowerCase())`
 * 파라미터 default
     * def add(x: Int, y: Int=10): Unit = println(x+y)
 * 가변 길이 파라미터
     * \*을 이용하면 Seq형으로 변환되어 입력
-    * def sum(num:Int\*) = num.reduce( _ + _ )
+    * `def sum(num:Int*) = num.reduce( _ + _ )`
 * 변수에 함수 결과 할당
     * val, var는 호출할 때마다 같은 값 반환
     * def는 호출할 때마다 다른 값 반환
-    * val random1 = Math.random()
-    * var random2 = Math.random()
-    * def random3 = Math.random()
+    * `val random1 = Math.random()`
+    * `var random2 = Math.random()`
+    * `def random3 = Math.random()`
 * 함수 내 다른 함수를 선언할 수 있음!
 
 #### 람다 함수
 * \_를 이용하여 묵시적인 파라미터 지정가능.
-* def exec(f: (Int,Int) => Int, x:Int, y:Int) = f(x,y)
-* exec((x:Int, y:Int) => x+y, 2, 3)
-* exec((x,y)=>x+y, 2,3)
-* exec(_ + _ , 3, 1)
+```scala
+ def exec(f: (Int,Int) => Int, x:Int, y:Int) = f(x,y)
+ exec((x:Int, y:Int) => x+y, 2, 3)
+ exec((x,y)=>x+y, 2,3)
+ exec(_ + _ , 3, 1)
+```
 
 #### 커링
 * 여러 개 인수 목록을 여러 개의 괄호로 정의
 * 정해진 파라미터 수보다 적은 인수로 호출시 리턴 값은 나머지 파라미터를 받는 함수.
-* def modN(n:Int, x:Int) = ((x%n)==0)
-* def modN(n:Int)(x:Int) = ((x%n)==0)
+* `def modN(n:Int, x:Int) = ((x%n)==0)`
+* `def modN(n:Int)(x:Int) = ((x%n)==0)`
     * n값을 미리 바인딩 하는 다른 함수로 선언 가능. 
     * 다른 함수의 파라미터로 전달 가능.
     
@@ -115,9 +117,11 @@
 
 ### 클래스
 * 멤버 변수 선언 및 생략 가능
-    * class Person(name:String, age:Int) //선언
-    * val p = new Person("Jay", 29) // 생성
-    * class A // 멤버변수 생략 가능
+   ```scala
+     class Person(name:String, age:Int) //선언
+     val p = new Person("Jay", 29) // 생성
+     class A // 멤버변수 생략 가능
+   ```
 * 클래스 멤버 변수
     * 가변 변수
         * 컴파일러가 클래스 내부에 자동으로 getter, setter 메소드 생성
@@ -147,11 +151,11 @@
     * 관련 클래스를 한파일에 모두 입력하게 강제할 수 있어 관리 효율성이 높아짐.
     * sealed를 이용하고 trait도 봉인 가능
     * file1.scala
-        * sealed abstract class Furniture
-        * case class Couch() extends Furniture
-        * case class Chair() extends Furniture
+        * `sealed abstract class Furniture`
+        * `case class Couch() extends Furniture`
+        * `case class Chair() extends Furniture`
     * file2.scala
-        * case class Desk() extends Furniture
+        * `case class Desk() extends Furniture`
         * sealed class를 생성하고 다른 파일에서 클래스 선언시 illegal inheritance from sealed class Furniture 오류 발생!
 #### Case Class       
 * 일반 클래스와 달리 인스턴스를 생성할 때 new를 사용하지 않음.
@@ -163,7 +167,7 @@
     * 케이스 클래스의 비교는 참조값을 이용하지 않고, 멤버변수의 데이터를 이용해 처리.
 * 초기화가 간단함
     * new를 이용하지 않고 초기화 가능.
-    * var p = Person("A", 10)
+    * `var p = Person("A", 10)`
 * 자동 코드 생성
     * toString, hashCode, equals를 자동으로 생성.
     * 새로운 복제 객체를 리턴하는 copy() 메서드를 자동으로 생성.
@@ -272,36 +276,42 @@
     * 데이터를 키 기준으로 병합.
     * 결과를 Map 형식으로 반환
     * 전달된 키와 벨류를 리스트 형식으로 반환
-    * var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))
+    * `var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))`
     * datas.groupBy(\_.\_1).foreach({case(k,v) => printf("key: %s, value: %s\n", k, v) })
 * filter
     * 데이터를 필터링하여 없애거나 분류함
     * partition : 분류할 때 사용.
     * find : 데이터를 검색할 때
     * takeWhile, dropWhile을 이용하여 원하는 부분까지 데이터 선택
-    * val list = (1 to 10)
-    * list.filter(\_ > 5) // 5 이상 만
-    * list.partition(\_ % 2 == 0) // 홀수, 짝수 데이터 분리
-    * list.find(\_ == 3) // 3을 검색
-    * val list2 = List(1,2,3,-1,4,5,6)
-    * list2.takeWhile(\_>0) // 1,2,3
-    * list2.dropWhile(\_<0) // -1,4,5,6
+   ```scala
+    val list = (1 to 10)
+    list.filter(\_ > 5) // 5 이상 만
+    list.partition(\_ % 2 == 0) // 홀수, 짝수 데이터 분리
+    list.find(\_ == 3) // 3을 검색
+    val list2 = List(1,2,3,-1,4,5,6)
+    list2.takeWhile(\_>0) // 1,2,3
+    list2.dropWhile(\_<0) // -1,4,5,6
+   ```
 * zip
     * 두개의 콜렉션을 같은 인덱스의 데이터로 묶음.
     * 길이가 다르면 작은 것 기준.
-    * for ( item <- List(1,2,3).zip(List(1,2,3))) // (1,1),(2,2),(3,3)
+    `for ( item <- List(1,2,3).zip(List(1,2,3))) // (1,1),(2,2),(3,3)`
 * mapValues
     * Map에서 벨류만 map 함수 처리하고 싶을 때 사용
-    * var maps = Map("A" -> 1, "B" -> 2, "C" -> 3, "D" -> 4, "E" -> 5)
-    * maps.mapValues(x=>x*x).foreach(x=>x match {case(k,v) => printf("key: %s, value: %s\n",k,v)})
-    * var maps = Map("A" -> List(1, 2, 3), "B" -> List(4, 5, 6), "C" -> List(7, 8, 9))
-    * maps.mapValue(\_.sum).foreach({case(k,v)=>printf("key: %s, value: %s\n",k,v)})
+   ```scala
+    var maps = Map("A" -> 1, "B" -> 2, "C" -> 3, "D" -> 4, "E" -> 5)
+    maps.mapValues(x=>x*x).foreach(x=>x match {case(k,v) => printf("key: %s, value: %s\n",k,v)})
+    var maps = Map("A" -> List(1, 2, 3), "B" -> List(4, 5, 6), "C" -> List(7, 8, 9))
+    maps.mapValue(\_.sum).foreach({case(k,v)=>printf("key: %s, value: %s\n",k,v)})
+   ```
 * sort
     * sorted, sortwith, sortBy
-    * val list = List(4,6,1,6,0)
-    * list.sorted // 0,1,4,6,6
-    * list.sorted(Ordering.Int.reverse) // 6,6,4,1,0
-    * val sList = List ("aa","bb","cc")
-    * sList.sortBy(\_.charAt(0)) // "aa","bb","cc"
-    * list.sortWith(\_ <= \_) // 0,1,4,6,6
-    * list.sortWith(\_ >= \_) // 6,6,4,1,0
+   ```scala
+    val list = List(4,6,1,6,0)
+    list.sorted // 0,1,4,6,6
+    list.sorted(Ordering.Int.reverse) // 6,6,4,1,0
+    val sList = List ("aa","bb","cc")
+    sList.sortBy(_.charAt(0)) // "aa","bb","cc"
+    list.sortWith(_ <= _) // 0,1,4,6,6
+    list.sortWith(_ >= _) // 6,6,4,1,0
+   ```
