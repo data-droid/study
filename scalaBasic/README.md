@@ -30,7 +30,7 @@
     * 함수의 실행이 외부에 영향을 끼치지 않는 함수.(병렬 계산이 가능!)
 * 익명 함수(Anonymous Function)
     * 함수 선언 없이 익명 함수를 생성하여 코드 길이를 줄임.
-    `Arrays.asList(1,2,3).stream().reduce((a,b)->a-b).get()`
+    * `Arrays.asList(1,2,3).stream().reduce((a,b)->a-b).get()`
 * 고차 함수(Higher-Order Function)
     * 함수를 인수로 취급하는 함수.
     * 함수를 입력 파라미터나 출력 값으로 처리.
@@ -80,7 +80,7 @@
     * `def printUpper(message:String):Unit = println(message.toUpperCase())`
     * `def printLower(message:String) = println(message.toLowerCase())`
 * 파라미터 default
-    * def add(x: Int, y: Int=10): Unit = println(x+y)
+    * `def add(x: Int, y: Int=10): Unit = println(x+y)`
 * 가변 길이 파라미터
     * \*을 이용하면 Seq형으로 변환되어 입력
     * `def sum(num:Int*) = num.reduce( _ + _ )`
@@ -200,29 +200,29 @@
 ### 콜렉션
 * 배열
     * 길이가 고정된 자료구조
-    * 선언 : val array1 = Array(1,2,3)
-    * 접근 : array1(0)
-    * 변경 : array1(0) = 10
-    * 배열 연결 : val array2 = array1 ++ array1
+    * 선언 : `val array1 = Array(1,2,3)`
+    * 접근 : `array1(0)`
+    * 변경 : `array1(0) = 10`
+    * 배열 연결 : `val array2 = array1 ++ array1`
     * 데이터 추가
-        * val array3 = 0 +: array2
-        * val array4 = array2 :+ 100
+        * `val array3 = 0 +: array2`
+        * `val array4 = array2 :+ 100`
 * 리스트
     * 가변 길 데이터를 저장
     * 선언 
-        * val list1 = list(1,2,3,4)
-        * val list2 = (1 to 100).toList
-        * val list3 = array1.toList
+        * `val list1 = list(1,2,3,4)`
+        * `val list2 = (1 to 100).toList`
+        * `val list3 = array1.toList`
     * 접근 
-        * list1(0)
-        * list1.head
-        * list1.tail
+        * `list1(0)`
+        * `list1.head`
+        * `list1.tail`
 * 셋(set)
     * 중복을 허용하지 않는 자료구조
-    * 선언 : val s1 = Set(1,1,2) // Set(1,2)
+    * 선언 : `val s1 = Set(1,1,2) // Set(1,2)`
     * 값 유무 확인
-        * s1(1) // true
-        * s1(3) // false
+        * `s1(1) // true`
+        * `s1(3) // false`
 * 튜플(tuple)
     * 불변의 데이터를 저장
     * 선언 : val hostPort = ("localhost", 80)
@@ -232,52 +232,58 @@
     * return이 Option 타입
     * getOrElse를 이용하거나, get 반환값 Option을 패턴매칭을 이용하는게 좋음.
     * 선언
-        * val map1 = Map(1->2)
-        * val map2 = Map("foo"->"bar")
+        * `val map1 = Map(1->2)`
+        * `val map2 = Map("foo"->"bar")`
     * Option 타입 반환
-        * map1.get(1) // Option[Int] = Some(2)
+        * `map1.get(1) // Option[Int] = Some(2)`
     * 키와 일치하는 데이터가 없으면 기본값 반환
-        * map1.getOrElse(1,0) // 2
-        * map1.getOrElse(10,0) // 0
+        * `map1.getOrElse(1,0) // 2`
+        * `map1.getOrElse(10,0) // 0`
 #### 반복문
 * for
-    * for (num <- 0 to 3) //to는 이하
-    * for (num <- 0 until 3) // until은 미만
-    * for (str <- Array("A","B","C"))
-    * for (index <- 0 until strs.length)
-    * for ((value, index) <- strs.zipWithIndex)
-    * for ((k,v) <- Map("k1"->"v1","k2"->"v2","k3"->"v3"))
-    * for (x <- 0 to 2; y <- 0 to 3)
-    * for (x <- 0 to 10; if x%2)
+   ```scala
+     for (num <- 0 to 3) //to는 이하
+     for (num <- 0 until 3) // until은 미만
+     for (str <- Array("A","B","C"))
+     for (index <- 0 until strs.length)
+     for ((value, index) <- strs.zipWithIndex)
+     for ((k,v) <- Map("k1"->"v1","k2"->"v2","k3"->"v3"))
+     for (x <- 0 to 2; y <- 0 to 3)
+     for (x <- 0 to 10; if x%2)
+   ```
 * do..while
-    * val i=0; do { i+=1 } while (i<3)
+    * `val i=0; do { i+=1 } while (i<3)`
 * while
-    * val i=0; while(i<3) { i+=1 }
+    * `val i=0; while(i<3) { i+=1 }`
 #### sort, group, filter functions
 * map
     * 콜렉션의 각 아이템에 대해 동일 작업을 시행
-    * var list = (1 to 10)
-    * list.map(_+1) //list 각 아이템에 +1
-    * val strs = List("david", "kevin", "james")
-    * strs.map(_.toUpperCase) // 대문자로~
+    ```scala
+     var list = (1 to 10)
+     list.map(_+1) //list 각 아이템에 +1
+     val strs = List("david", "kevin", "james")
+     strs.map(_.toUpperCase) // 대문자로~
+     ```
 * reduce, fold
     * 콜렉션의 아이템을 집계할 때 사용.
     * fold는 기본값(초기값)을 제공할 수 있음.
     * 각 함수모두 left, right 방향을 가질 수 있음.
-    * val list = (1 to 10)
-    * list.reduce(\_+\_) // 55
-    * list.reduceLeft(\_+\_) // 55
-    * list.reduceRight(\_+\_) // 55
-    * list.reduce(\_-\_) // -53
-    * list.reduceLeft(\_-\_) // -53
-    * list.reduceRight(\_-\_) // -5
-    * list.fold(10)(\_+\_) // 65
+    ```scala
+     val list = (1 to 10)
+     list.reduce(_+_) // 55
+     list.reduceLeft(_+_) // 55
+     list.reduceRight(_+_) // 55
+     list.reduce(_-_) // -53
+     list.reduceLeft(_-_) // -53
+     list.reduceRight(_-_) // -5
+     list.fold(10)(_+_) // 65
+    ```
 * groupBy
     * 데이터를 키 기준으로 병합.
     * 결과를 Map 형식으로 반환
     * 전달된 키와 벨류를 리스트 형식으로 반환
     * `var datas = List(("A",1),("B",2),("C",6),("B",2),("A",8),("C",2))`
-    * datas.groupBy(\_.\_1).foreach({case(k,v) => printf("key: %s, value: %s\n", k, v) })
+    * `datas.groupBy(_._1).foreach({case(k,v) => printf("key: %s, value: %s\n", k, v) })`
 * filter
     * 데이터를 필터링하여 없애거나 분류함
     * partition : 분류할 때 사용.
