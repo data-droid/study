@@ -1,6 +1,6 @@
 # study for data science
 ## Python
-* Jump2Python [ref](https://wikidocs.net/book/1)
+* [Jump2Python](https://github.com/data-droid/study/tree/master/Python/Jump2Python) [ref](https://wikidocs.net/book/1)
 * NumPyBasic [ref](www.DataCamp.com)
 ## PythonDataScience
 ## handson ML
