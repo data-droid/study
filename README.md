@@ -9,9 +9,10 @@
 * DataVisualization2
 * Intro ML
 * Intermediate ML
-* [..ing] Deep Learning
+* (..ing) Deep Learning
 * Pandas
 * Python
-## ScalaBasic
-## [..ing] SparkBasic
+## Spark&Scala
+* [scalaBasic](https://github.com/data-droid/study/tree/master/scalaBasic)
+* [(..ing) SparkBasic](https://github.com/data-droid/study/tree/master/sparkBasic)
 ## [todo] DB
