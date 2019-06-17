@@ -15,6 +15,6 @@
 ## KaggleKernal
 * [(..ing) Movie Recommendation](https://github.com/data-droid/study/blob/master/kaggleKernal/MovieRecommendationSystems.ipynb)
 ## Spark&Scala
-* [scalaBasic](https://github.com/data-droid/study/tree/master/scalaBasic)
-* [(..ing) SparkBasic](https://github.com/data-droid/study/tree/master/sparkBasic)
+* [scalaBasic](https://github.com/data-droid/study/tree/master/Spark%26Scala/scalaBasic)
+* [(..ing) SparkBasic](https://github.com/data-droid/study/tree/master/Spark%26Scala/sparkBasic)
 ## [todo] DB
