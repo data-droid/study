@@ -61,13 +61,14 @@
             * 실제 데이터를 가지는 구체화 뷰
             * 집계 데이터를 개별적으로 보관하여 쿼리 수행시 빠른 속도로 데이터 조회 가능
             ```
-        CREATE MATERIALIZED VIEW mv1
-AS
-SELECT empid, deptname, hire_date
-FROM emps JOIN depts
-  ON (emps.deptno = depts.deptno)
-WHERE hire_date >= '2016-01-01';
-```
+            CREATE MATERIALIZED VIEW mv1
+            AS
+            SELECT empid, deptname, hire_date
+            FROM emps JOIN depts
+              ON (emps.deptno = depts.deptno)
+            WHERE hire_date >= '2016-01-01';
+            ```
+            
         * 쿼리 결과 캐시
         * 테이블 정보 관리 데이터베이스 추가
             * 하이브 메타스토어에만 확인할 수 있던 정보를 데이터 베이스를 통해 확인가능
@@ -92,19 +93,19 @@ WHERE hire_date >= '2016-01-01';
     
 ## Hive CLI
 * 하이브 쿼리를 실행하는 가장 기본적인 도구
-```
-## 사용법
- -e <quoted-query-string>         커맨드 라인으로 실행할 쿼리 
- -f <filename>                    쿼리가 작성된 파일을 이용하여 실행할 경우 
- --hiveconf <property=value>      하이브 설정값 입력 
-                                  예) --hiveconf tez.queue.name=queue
- --hivevar <key=value>            쿼리에서 사용할 변수 입력 
-                                  예) --hivevar targetDate=20180101
-ex) $ hive -e 'SELECT * FROM table WHERE yymmdd=${hivevar:targetDate}' \
-   --hiveconf hie.execution.engine=tez \
-   --hiveconf tez.queue.name=queue_name \
-   --hivevar targetDate=20180101
-```
+    ```
+    ## 사용법
+     -e <quoted-query-string>         커맨드 라인으로 실행할 쿼리 
+     -f <filename>                    쿼리가 작성된 파일을 이용하여 실행할 경우 
+     --hiveconf <property=value>      하이브 설정값 입력 
+                                      예) --hiveconf tez.queue.name=queue
+     --hivevar <key=value>            쿼리에서 사용할 변수 입력 
+                                      예) --hivevar targetDate=20180101
+    ex) $ hive -e 'SELECT * FROM table WHERE yymmdd=${hivevar:targetDate}' \
+       --hiveconf hie.execution.engine=tez \
+       --hiveconf tez.queue.name=queue_name \
+       --hivevar targetDate=20180101
+    ```
 
 ## Beeline
 * HiveServer2에 접속하여 쿼리를 실행하기 위한 도구.
