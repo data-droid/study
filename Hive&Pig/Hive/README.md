@@ -330,7 +330,8 @@ DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
                "escapeChar"    = "\\"
             )  
             STORED AS TEXTFILE;
-        ```
+           ```
+        
         * STORED AS
             * 데이터 저장하는 파일 포맷
             * TEXTFILE, SEQUENCEFILE, ORC, PARQUET
