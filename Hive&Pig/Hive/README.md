@@ -189,24 +189,25 @@ DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
 ## TABLE
 * HDFS에 저장된 파일과 디렉토리 구조에 대한 메타 정보
 * CREATE
-```
-CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name // TABLE TYPE 정의
-  [(col_name data_type [COMMENT col_comment], ... [constraint_specification])]
-  [COMMENT table_comment]
-  [PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)]  // 데이터 폴더 구분을 통한 읽기속도 향상
-  [CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS]
-  [SKEWED BY (col_name, col_name, ...)  
-     ON ((col_value, col_value, ...), (col_value, col_value, ...), ...)
-     [STORED AS DIRECTORIES]
-  [
-   [ROW FORMAT row_format] 
-   [STORED AS file_format]
-     | STORED BY 'storage.handler.class.name' [WITH SERDEPROPERTIES (...)] 
-  ]
-  [LOCATION hdfs_path]  // 데이터 위치
-  [TBLPROPERTIES (property_name=property_value, ...)] 
-  [AS select_statement]; 
-```
+    ```
+    CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name // TABLE TYPE 정의
+      [(col_name data_type [COMMENT col_comment], ... [constraint_specification])]
+      [COMMENT table_comment]
+      [PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)]  // 데이터 폴더 구분을 통한 읽기속도 향상
+      [CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS]
+      [SKEWED BY (col_name, col_name, ...)  
+         ON ((col_value, col_value, ...), (col_value, col_value, ...), ...)
+         [STORED AS DIRECTORIES]
+      [
+       [ROW FORMAT row_format] 
+       [STORED AS file_format]
+         | STORED BY 'storage.handler.class.name' [WITH SERDEPROPERTIES (...)] 
+      ]
+      [LOCATION hdfs_path]  // 데이터 위치
+      [TBLPROPERTIES (property_name=property_value, ...)] 
+      [AS select_statement]; 
+    ```
+
     * LOCATION
         * 테이블의 데이터 저장위치. (default는 데이터베이스 저장위치 아래)
     * TABLE TYPE
@@ -244,20 +245,21 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name // TABL
               col2 STRING
             ) CLUSTERED BY col2 SORTED BY col2  INTO 20 BUCKETS
             ```
+        
         * SKEWED BY
             * 값을 분리된 파일에 저장하여 특정한 값이 자주 등장하는 경우 속도 향상.
             
             ```
             -- col1의 col_value 값을 스큐로 저장  
-CREATE TABLE tbl (
-  col1 STRING,
-  col2 STRING
-) SKEWED BY (col1) on ('col_value');
-```
+            CREATE TABLE tbl (
+              col1 STRING,
+              col2 STRING
+            ) SKEWED BY (col1) on ('col_value');
+            ```
     * ROW FORMAT
         * 컬럼.로우의 DELIMETER와 데이터 해석방법을 정의하는 SerDe 지정 및 저장 방식 정의.
         * DELIMITED
-            ```
+        ```
         -- 하이브의 기본 구분자를 이용한 테이블 생성 
         --   입력 데이터
         $ cat sample.txt 
@@ -288,7 +290,7 @@ CREATE TABLE tbl (
           LINES TERMINATED BY '\n'             -- 로(row)를 구분하는 기준
           ESCAPED BY '\\'                      -- 값을 입력하지 않음
           NULL DEFINED AS 'null'               -- null 값을 표현(0.13 버전에서 추가)
-      ```
+        ```
       
         * SerDe
             * 파일 포맷을 정의하는 것으로 기본 SerDe, 정규식(RegExSerDe), JSON(JsonSerDe), CSV(OpenCSVSerDe)
