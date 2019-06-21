@@ -226,14 +226,122 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name // TABL
         * 정보 제공 유무에 따라 Dynamic/Static으로 나눠짐.
         ```
         CREATE TABLE tbl(
-col1 STRING
-) PARTITIONED BY (yymmdd STRING)
-```
-```
-//위와 같이 선언시 일별로 저장됨.
-hdfs://tbl/yymmddval=20180501/0000_0
-hdfs://tbl/yymmddval=20180502/0000_0
-hdfs://tbl/yymmddval=20180503/0000_0
-```
+        col1 STRING
+        ) PARTITIONED BY (yymmdd STRING)
+        //위와 같이 선언시 일별로 저장됨.
+        hdfs://tbl/yymmddval=20180501/0000_0
+        hdfs://tbl/yymmddval=20180502/0000_0
+        hdfs://tbl/yymmddval=20180503/0000_0
+        ```
     * BUCKET, SKEWED
-    
+        * CLUSTERED BY SORTED BY INTO BUCKET
+            * 버켓팅은 CLUSTERED BY를 이용하여 설정하며 일반적으로 SORTED BY와 함께 사용됨
+            * 설정한 버켓(파일)의 개수에 지정한 컬럼의 데이터를 해쉬처리하여 저장함.
+            ```
+            -- col2 를 기준으로 버켓팅 하여 20개의 파일에 저장 
+            CREATE TABLE tbl(
+              col1 STRING,
+              col2 STRING
+            ) CLUSTERED BY col2 SORTED BY col2  INTO 20 BUCKETS
+            ```
+        * SKEWED BY
+            * 값을 분리된 파일에 저장하여 특정한 값이 자주 등장하는 경우 속도 향상.
+            
+            ```
+            -- col1의 col_value 값을 스큐로 저장  
+CREATE TABLE tbl (
+  col1 STRING,
+  col2 STRING
+) SKEWED BY (col1) on ('col_value');
+```
+    * ROW FORMAT
+        * 컬럼.로우의 DELIMETER와 데이터 해석방법을 정의하는 SerDe 지정 및 저장 방식 정의.
+        * DELIMITED
+            ```
+        -- 하이브의 기본 구분자를 이용한 테이블 생성 
+        --   입력 데이터
+        $ cat sample.txt 
+        a,val1^val2^val3,key1:val1^key2:val2
+        
+        -- ROW FORMAT을 이용한 테이블 생성 
+        CREATE TABLE tbl (
+         col1 STRING,
+         col2 ARRAY<STRING>, 
+         col3 MAP<STRING, STRING>
+        ) ROW FORMAT DELIMITED
+           FIELDS TERMINATED BY ','
+           COLLECTION ITEMS TERMINATED BY '^'
+           MAP KEYS TERMINATED BY ':';
+
+        -- 데이터 로드 
+        LOAD DATA LOCAL INPATH './sample.txt' INTO TABLE tbl;
+        
+        -- 데이터 조회, 구분자에 따라 데이터가 구분 됨 
+        hive> select * from tbl;
+        OK
+        a   ["val1","val2","val3"]  {"key1":"val1","key2":"val2"}
+
+        -- 지정가능한 구분자 
+          FIELDS TERMINATED BY '\t'            -- 칼럼을 구분하는 기준
+          COLLECTION ITEMS TERMINATED BY ','   -- 리스트를 구분하는 기준
+          MAP KEYS TERMINATED BY '='           -- 맵데이터의 키와 밸류를 구분하는 기준
+          LINES TERMINATED BY '\n'             -- 로(row)를 구분하는 기준
+          ESCAPED BY '\\'                      -- 값을 입력하지 않음
+          NULL DEFINED AS 'null'               -- null 값을 표현(0.13 버전에서 추가)
+      ```
+      
+        * SerDe
+            * 파일 포맷을 정의하는 것으로 기본 SerDe, 정규식(RegExSerDe), JSON(JsonSerDe), CSV(OpenCSVSerDe)
+          ```
+          -- RegEx 서데 
+            -- 127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326
+            CREATE TABLE apachelog (
+              host      STRING,
+              identity  STRING,
+              user      STRING,
+              time      STRING,
+              request   STRING,
+              status    STRING,
+              size      STRING,
+              referer   STRING,
+              agent     STRING )
+            ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.RegexSerDe'
+            WITH SERDEPROPERTIES (
+              "input.regex" = "([^]*) ([^]*) ([^]*) (-|\\[^\\]*\\]) ([^ \"]*|\"[^\"]*\") (-|[0-9]*) (-|[0-9]*)(?: ([^ \"]*|\".*\") ([^ \"]*|\".*\"))?"
+            );
+
+            -- JSON 서데 
+            CREATE TABLE my_table(
+              a string, 
+              b bigint 
+            ) ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+            STORED AS TEXTFILE;
+
+            -- CSV 서데 
+            CREATE TABLE my_table(
+              a string, 
+              b string
+            ) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+            WITH SERDEPROPERTIES (
+               "separatorChar" = "\t",
+               "quoteChar"     = "'",
+               "escapeChar"    = "\\"
+            )  
+            STORED AS TEXTFILE;
+        ```
+        * STORED AS
+            * 데이터 저장하는 파일 포맷
+            * TEXTFILE, SEQUENCEFILE, ORC, PARQUET
+            ```
+            -- 저장 포맷을 ORC로 설정하고, ORC 관련 설정정보 전달 
+            CREATE TABLE tbl (
+              col1 STRING
+            ) STORED AS ORC 
+            TBLPROPERTIES ("orc.compress"="SNAPPY");
+
+            -- INPUTFORMAT, OUTPUTFORMAT을 따로 지정하는 것도 가능 
+            CREATE TABLE tbl1 (
+              col1 STRING 
+            ) STORED AS INPUTFORMAT  "com.hadoop.mapred.DeprecatedLzoTextInputFormat"
+                        OUTPUTFORMAT "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat";
+            ```
