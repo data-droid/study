@@ -67,57 +67,57 @@
           ```
 
     * ```cpp
-    vector<int> getPI(string pattern) {
-        vector<int> result(pattern.length(),0);
-        int j=0;
-        for(int i=1; i<pattern.length(); i++) {
-            while(j>0 && pattern[i]!=pattern[j])
-                j = pi[j-1];
-            if(pattern[i] == pattern[j])
-                pi[i] = ++j;
-        }
-        return result;
-    }
-    ```
+       vector<int> getPI(string pattern) {
+           vector<int> result(pattern.length(),0);
+           int j=0;
+           for(int i=1; i<pattern.length(); i++) {
+               while(j>0 && pattern[i]!=pattern[j])
+                   j = pi[j-1];
+               if(pattern[i] == pattern[j])
+                   pi[i] = ++j;
+           }
+           return result;
+       }
+      ```
     
     * 위의 코드가지고 다른 예를 보자!
-        * ```
-        //BCBCBCBA
-        [0]
-    
-        BCBCBCBA
-        -BCBCBCB
-        [0,0]
-        
-        BCBCBCBA
-        --BCBCBC
-        [0,0,1]
-    
-        BCBCBCBA
-        --BCBCBC
-        [0,0,1,2]
-    
-        BCBCBCBA
-        --BCBCBC
-        [0,0,1,2,3]
-    
-        BCBCBCBA
-        --BCBCBC
-        [0,0,1,2,3,4]
-    
-        BCBCBCBA
-        --BCBCBC
-        [0,0,1,2,3,4,5]
-    
-        BCBCBCBA
-        --BCBCBC
-        BCBCBCBA
-        ----BCBC
-        BCBCBCBA
-        ------BC
-        BCBCBCBA
-        -------B
-        [0,0,1,2,3,4,5,0]
+           * ```
+           //BCBCBCBA
+           [0]
+
+           BCBCBCBA
+           -BCBCBCB
+           [0,0]
+
+           BCBCBCBA
+           --BCBCBC
+           [0,0,1]
+
+           BCBCBCBA
+           --BCBCBC
+           [0,0,1,2]
+
+           BCBCBCBA
+           --BCBCBC
+           [0,0,1,2,3]  
+
+           BCBCBCBA
+           --BCBCBC
+           [0,0,1,2,3,4]
+
+           BCBCBCBA
+           --BCBCBC
+           [0,0,1,2,3,4,5]
+
+           BCBCBCBA
+           --BCBCBC
+           BCBCBCBA
+           ----BCBC
+           BCBCBCBA
+           ------BC
+           BCBCBCBA
+           -------B
+           [0,0,1,2,3,4,5,0]
         ```
 * 구현
 ```cpp
