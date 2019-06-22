@@ -26,7 +26,7 @@
             
             ABCDABCDABEE
             -----ABCDABE
-         ```
+          ```
     
     * KMP의 풀이
         * ```
@@ -64,7 +64,8 @@
             
             ABCDABE
             0
-         ```
+          ```
+
     * ```cpp
     vector<int> getPI(string pattern) {
         vector<int> result(pattern.length(),0);
