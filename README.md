@@ -6,7 +6,7 @@
 * [leetcode](https://github.com/data-droid/study/tree/master/Algorithms/leetcode)
 ## BigData
 * Hadoop
-* [Hive](https://github.com/data-droid/study/tree/master/Bigdata/Hive)
+* [(..ing) Hive](https://github.com/data-droid/study/tree/master/Bigdata/Hive)
 * Pig
 ## Python
 * [Jump2Python](https://github.com/data-droid/study/tree/master/Python/Jump2Python) [ref](https://wikidocs.net/book/1)
