@@ -1,4 +1,13 @@
 # study for data science
+## Algorithms
+* basic
+  * [Algorithms](https://github.com/data-droid/study/tree/master/Algorithms/basic/Algorithms)
+  * [DataStructure](https://github.com/data-droid/study/tree/master/Algorithms/basic/DataStructure)
+* [leetcode](https://github.com/data-droid/study/tree/master/Algorithms/leetcode)
+## BigData
+* Hadoop
+* [Hive](https://github.com/data-droid/study/tree/master/Bigdata/Hive)
+* Pig
 ## Python
 * [Jump2Python](https://github.com/data-droid/study/tree/master/Python/Jump2Python) [ref](https://wikidocs.net/book/1)
 * [NumPyBasic](https://github.com/data-droid/study/blob/master/Python/NumPyBasic.ipynb) [ref](www.DataCamp.com)
