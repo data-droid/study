@@ -23,6 +23,7 @@
 * [Python](https://github.com/data-droid/study/tree/master/kaggleLearn)
 ## KaggleKernel
 * [Movie Recommendation](https://github.com/data-droid/study/blob/master/kaggleKernal/MovieRecommendationSystems.ipynb)
+* [Linear Algebra](https://github.com/data-droid/study/blob/master/kaggleKernel/LinearAlgebra.ipynb)
 ## Spark&Scala
 * [scalaBasic](https://github.com/data-droid/study/tree/master/Spark%26Scala/scalaBasic)
 * [(..ing) SparkBasic](https://github.com/data-droid/study/tree/master/Spark%26Scala/sparkBasic)
