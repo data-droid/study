@@ -11,6 +11,7 @@
 ## Python
 * [Jump2Python](https://github.com/data-droid/study/tree/master/Python/Jump2Python) [ref](https://wikidocs.net/book/1)
 * [NumPyBasic](https://github.com/data-droid/study/blob/master/Python/NumPyBasic.ipynb) [ref](www.DataCamp.com)
+* [JupyterHub](https://github.com/data-droid/study/blob/master/Python/JupyterHub.ipynb)
 * [DataScience](https://github.com/data-droid/study/tree/master/Python/DataScience)
 ## [handson ML](https://github.com/data-droid/study/tree/master/handsonML)
 ## KaggleLearn
