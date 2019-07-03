@@ -8,6 +8,7 @@
 * [todo] Hadoop
 * [(..ing) Hive](Bigdata/Hive)
 * [todo] Pig
+* Hue(Bigdata/Hue/hue.ipynb)
 ## Python
 * [Jump2Python](Python/Jump2Python) [ref](https://wikidocs.net/book/1)
 * [NumPyBasic](Python/NumPyBasic.ipynb) [ref](www.DataCamp.com)
