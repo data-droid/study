@@ -11,8 +11,8 @@
 * [Hue](Bigdata/Hue/hue.ipynb)
 ## Python
 * [DataScience](Python/DataScience)
-* [Jump2Python](Python/Jump2Python) [ref](https://wikidocs.net/book/1)
-* [NumPyBasic](Python/NumPyBasic.ipynb) [ref](www.DataCamp.com)
+* [Jump2Python](Python/Jump2Python)
+* [NumPyBasic](Python/NumPyBasic.ipynb)
 * [JupyterHub](Python/JupyterHub.ipynb)
 ## [handson ML](handsonML)
 ## KaggleLearn
