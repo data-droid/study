@@ -14,7 +14,6 @@
 * [Jump2Python](Python/Jump2Python)
 * [NumPyBasic](Python/NumPyBasic.ipynb)
 * [JupyterHub](Python/JupyterHub.ipynb)
-## [handson ML](handsonML)
 ## KaggleLearn
 * [DataVisualization](DataVisualization)
 * [DataVisualization2](kaggleLearn/DataVisualization2)
@@ -23,9 +22,10 @@
 * [Intro ML](kaggleLearn/IntroToML)
 * [Pandas](kaggleLearn/pandas.ipynb)
 * [Python](kaggleLearn)
-## KaggleKernel
-* [Movie Recommendation](kaggleKernal/MovieRecommendationSystems.ipynb)
-* [Linear Algebra](kaggleKernel/LinearAlgebra.ipynb)
+## MLStudy
+* [handson ML](MLStudy/handsonML)
+* [KaggleKernel](MLStudy/kaggleKernel)
+* [paper](MLStudy/paper)
 ## Spark&Scala
 * [scalaBasic](Spark%26Scala/scalaBasic)
 * [(..ing) SparkBasic](Spark%26Scala/sparkBasic)
