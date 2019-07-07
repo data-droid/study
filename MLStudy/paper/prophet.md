@@ -12,8 +12,8 @@
     * 완전 자동화 되서 분석하는건 어려움.
     * 도메인 지식이 많이 필요함.
 * 확장 가능한 시계열을 만들겠다!
-* 최대한 많은 사람이 쓰고, 여러 feature에 제공가능한 도구를 만들겠다!
-![](https://t1.daumcdn.net/cfile/tistory/99C52C4E5B16A17227)
+* 최대한 많은 사람이 쓰고, 여러 feature에 제공가능한 도구를 만들겠다
+* ![](https://t1.daumcdn.net/cfile/tistory/99C52C4E5B16A17227)
 * 분석가들은 필요한 모델링과 그 결과만 살펴보도록. 나머지는 알아서.
 
 ### 시계열 분석이란?
@@ -76,7 +76,8 @@
         ![](https://t1.daumcdn.net/cfile/tistory/99CAAE335B175E6A0D)
     * 이를 풀기 위해 행렬식으로 표현
         * β = [a1, b1, . . . , aN , bN ]
-        ![](https://t1.daumcdn.net/cfile/tistory/99697F3D5B175DC110)에 대해 ![](https://t1.daumcdn.net/cfile/tistory/990BFE3A5B175DF31E)
+        ![](https://t1.daumcdn.net/cfile/tistory/99697F3D5B175DC110)에 대해 
+        ![](https://t1.daumcdn.net/cfile/tistory/990BFE3A5B175DF31E)
 
 ### h(t) : Holiday
 * 휴일이 영향력을 가지고 있기 때문에 처리하기 위함.
