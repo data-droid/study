@@ -18,12 +18,12 @@
 
 ### 시계열 분석이란?
 * 시계열 분석에 필요한 요소
-![](https://t1.daumcdn.net/cfile/tistory/99BD67345B16A21932)
+* ![](https://t1.daumcdn.net/cfile/tistory/99BD67345B16A21932)
 * 위는 페이스북의 이벤트인 친구신청이나 여러 상호작용을 점으로 나타낸 그래프인데 어떤 효과들이 있을까?
     * 연도, 요일, 연말, 시즌 효과.
     * 트렌드가 완전히 바뀌는 경우
 * 기존 방법들!
-![](https://t1.daumcdn.net/cfile/tistory/99FAE63B5B16A55D03)
+* ![](https://t1.daumcdn.net/cfile/tistory/99FAE63B5B16A55D03)
     * arima
         * 계절성을 잘 포착하지 못함.
         * 최대차분개수, 자기회귀, 이동평균 값을 조정해야하지만 잘 모르는 사람들에게는 어려움.
@@ -32,7 +32,7 @@
 
 ### Prophet
 * Harvey & Peters 1990의 기본 적인 3개의 요소를 따름
-![](https://t1.daumcdn.net/cfile/tistory/991B253B5B1714BF25)
+* ![](https://t1.daumcdn.net/cfile/tistory/991B253B5B1714BF25)
     * g(t) : 반복적인 요소를 가지지 않는 트렌드.
     * s(t) : 요일, 연, 계절성과 같은 반복적인 변화
     * h(t) : Holiday와 같이 불규칙하게 영향을 미치는 요소
@@ -54,7 +54,7 @@
         * M : Offset Parameter
     * C는 인터넷 사용자 증가에 따라 바뀔 수 있기 때문에 C(t)
     * 성장률 또한 지역마다 달라지기 때문에 아래와 같이 변함
-    ![](https://t1.daumcdn.net/cfile/tistory/99FD93385B17284916)
+    * ![](https://t1.daumcdn.net/cfile/tistory/99FD93385B17284916)
     * 이를 조합하면 결국 piecewise logistic growth model로 됨.
 
 * Piecewise linear model 
@@ -72,12 +72,12 @@
         * N을 얼만큼 넣느냐가 중요함.
             * 연단위면 N은 10, 주단위면 N은 3이 제일 잘 들어 맞는것 같다고 함.
         * N이 크면 패턴이 빠르게 바뀌고, 작으면 느리게 변함.
-        ![](https://t1.daumcdn.net/cfile/tistory/992BF1335B175E6915)
-        ![](https://t1.daumcdn.net/cfile/tistory/99CAAE335B175E6A0D)
+        * ![](https://t1.daumcdn.net/cfile/tistory/992BF1335B175E6915)
+        * ![](https://t1.daumcdn.net/cfile/tistory/99CAAE335B175E6A0D)
     * 이를 풀기 위해 행렬식으로 표현
         * β = [a1, b1, . . . , aN , bN ]
-        ![](https://t1.daumcdn.net/cfile/tistory/99697F3D5B175DC110)에 대해 
-        ![](https://t1.daumcdn.net/cfile/tistory/990BFE3A5B175DF31E)
+        * ![](https://t1.daumcdn.net/cfile/tistory/99697F3D5B175DC110)에 대해 
+        * ![](https://t1.daumcdn.net/cfile/tistory/990BFE3A5B175DF31E)
 
 ### h(t) : Holiday
 * 휴일이 영향력을 가지고 있기 때문에 처리하기 위함.
@@ -88,13 +88,13 @@
 ### Model Fitting
 * 주기성과 휴일에 관한 정보가 행렬 X
 * change point에 대한 정보가 행렬 A
-![](https://t1.daumcdn.net/cfile/tistory/995DF2415B17623424)
+* ![](https://t1.daumcdn.net/cfile/tistory/995DF2415B17623424)
 * 위의 결과는 아래와 같음.
-![](https://t1.daumcdn.net/cfile/tistory/99C4F6395B17633C2F)
+* ![](https://t1.daumcdn.net/cfile/tistory/99C4F6395B17633C2F)
 * Prophet은 주단위, 연단위 주기성을 앞에서 본 것들 보다 잘 포착하고 있음. 다만, 2014년 데이터가 2013년을 통해 오버피팅 되어 보임.
-![](https://t1.daumcdn.net/cfile/tistory/999559455B1763C92B)
+* ![](https://t1.daumcdn.net/cfile/tistory/999559455B1763C92B)
 * 모든 데이터로 트렌드를 나타낸 그래프로 점선으로 표현된 부분은 예측 부분.
-![](https://t1.daumcdn.net/cfile/tistory/999BC1495B17648032)
+* ![](https://t1.daumcdn.net/cfile/tistory/999BC1495B17648032)
 * 각 요소별로 어떤 변화가 있는지 확인 가능함.
 
 * 위를 통해 알수 있는 부분
@@ -106,16 +106,16 @@
 * Prophet은 **직관**은 극대화시키고, 자동화시키는 부분은 자동화하여 편리함.
 
 ### Model Evaluation
-![](https://t1.daumcdn.net/cfile/tistory/993E194C5B176B5E06)
+* ![](https://t1.daumcdn.net/cfile/tistory/993E194C5B176B5E06)
 * T까지의 자료가 있고 h를 예측할때 그 사이 거리.
 * 페이스북은 MAPE(Mean Absolute Percentage Error)를 선호함.
-![](https://t1.daumcdn.net/cfile/tistory/9961C43B5B17739926)
+* ![](https://t1.daumcdn.net/cfile/tistory/9961C43B5B17739926)
     * 지역적 평활화가 되어있어 에러가 있으면 예측 전구간에서 일정하게 발생해야함.
     * 시간이 지날수록 h 예측은 조금씩 떨어져야한다는 점.
 * Simulated Historical Forecasts
     * 윈도우 사이즈가 작은 여러 데이터셋으로 모아 예측하면서 생기는 에러들로 어느 지점으로 수렴할 것.
     * 윈도우가 작으면 에러가 막 바뀌고 너무 크면 다 비슷하기 때문에 대충 전체기간의 절반정도를 대상으로 사이즈를 잡고 나올수 있는 예측치를 측정.
-    ![](https://t1.daumcdn.net/cfile/tistory/99B67A465B1776D530)
+    * ![](https://t1.daumcdn.net/cfile/tistory/99B67A465B1776D530)
 * 모델 튜닝
     * Baseline 모델보다 뭔가 떨어질 경우
         * trend, seasonality 수정
