@@ -85,5 +85,40 @@
 ```
 
 ### Model Fitting
+* 주기성과 휴일에 관한 정보가 행렬 X
+* change point에 대한 정보가 행렬 A
+![](https://t1.daumcdn.net/cfile/tistory/995DF2415B17623424)
+* 위의 결과는 아래와 같음.
+![](https://t1.daumcdn.net/cfile/tistory/99C4F6395B17633C2F)
+* Prophet은 주단위, 연단위 주기성을 앞에서 본 것들 보다 잘 포착하고 있음. 다만, 2014년 데이터가 2013년을 통해 오버피팅 되어 보임.
+![](https://t1.daumcdn.net/cfile/tistory/999559455B1763C92B)
+* 모든 데이터로 트렌드를 나타낸 그래프로 점선으로 표현된 부분은 예측 부분.
+![](https://t1.daumcdn.net/cfile/tistory/999BC1495B17648032)
+* 각 요소별로 어떤 변화가 있는지 확인 가능함.
+
+* 위를 통해 알수 있는 부분
+    * Capacities : 수요, 트래픽
+    * ChangePoints : 트렌드가 변경되는 점
+    * Holiday and Seasonality : 영향을 많이 미치는 휴일
+    * Smoothing Parameter : 주기마다 변동을 얼마나 나타내야 하는지
+* τ 를 바꿔서 주기의 크기를 조절, σ 를 바꿔서 주기성을 강/약을 조절.
+* Prophet은 **직관**은 극대화시키고, 자동화시키는 부분은 자동화하여 편리함.
 
 ### Model Evaluation
+![](https://t1.daumcdn.net/cfile/tistory/993E194C5B176B5E06)
+* T까지의 자료가 있고 h를 예측할때 그 사이 거리.
+* 페이스북은 MAPE(Mean Absolute Percentage Error)를 선호함.
+![](https://t1.daumcdn.net/cfile/tistory/9961C43B5B17739926)
+    * 지역적 평활화가 되어있어 에러가 있으면 예측 전구간에서 일정하게 발생해야함.
+    * 시간이 지날수록 h 예측은 조금씩 떨어져야한다는 점.
+* Simulated Historical Forecasts
+    * 윈도우 사이즈가 작은 여러 데이터셋으로 모아 예측하면서 생기는 에러들로 어느 지점으로 수렴할 것.
+    * 윈도우가 작으면 에러가 막 바뀌고 너무 크면 다 비슷하기 때문에 대충 전체기간의 절반정도를 대상으로 사이즈를 잡고 나올수 있는 예측치를 측정.
+    ![](https://t1.daumcdn.net/cfile/tistory/99B67A465B1776D530)
+* 모델 튜닝
+    * Baseline 모델보다 뭔가 떨어질 경우
+        * trend, seasonality 수정
+    * 특정일자 예측률이 떨어질 경우
+        * 아웃라이어 제거
+    * 특정 cutoff(연말 등)에 예측률이 떨어질 경우
+        * changepoint를 추가
