@@ -81,8 +81,86 @@
 
 ### h(t) : Holiday
 * 휴일이 영향력을 가지고 있기 때문에 처리하기 위함.
-* Prophet은 나라별 휴일을 가지고 있어 활용 가능하나, 한국은 없기 때문에 만들어 줘야함.
+* Prophet은 나라별 휴일을 가지고 있어 활용 가능하나, 한국은 없기 때문에 만들어 줘야함. (hdays.py에 추가하면 됨!)
 ```python
+# ------------ Holidays in South Korea ---------------------
+class Korea(HolidayBase):
+    """
+    Implement public holidays in South Korea
+    Reference:
+    https://en.wikipedia.org/wiki/Public_holidays_in_South_Korea
+    """
+
+    def __init__(self, **kwargs):
+        self.country = "KR"
+        HolidayBase.__init__(self, **kwargs)
+
+    def _populate(self, year):
+        # Sinjeong
+        name = "New Year's Day"
+        self[date(year, 1, 1)] = name
+
+        # Seolnal
+        name = "Lunar New Year"
+        for offset in range(-1, 2, 1):
+            ds = LunarDate(year + offset, 1, 1).toSolarDate()
+            if ds.year == year:
+                self[ds-timedelta(days=1)] = name
+                self[ds] = name
+                self[ds+timedelta(days=1)] = name
+
+        # Samiljeol
+        name = "Independence Movement Day"
+        self[date(year, 3, 1)] = name
+
+
+        # Children's Day
+        name = "Children's Day"
+        self[date(year, 5, 5)] = name
+
+        # Buddha's Birthday
+        name = "Buddha's Birthday"
+        for offset in range(-1, 2, 1):
+            ds = LunarDate(year + offset, 4, 8).toSolarDate()
+            if ds.year == year:
+                self[ds] = name
+
+        # Memorial Day
+        name = "Memorial Day"
+        self[date(year, 6, 6)] = name
+
+        # Constitution Day
+        name = "Constitution Day"
+        self[date(year, 7, 17)] = name
+
+        # Liberation Day
+        name = "Liberation Day"
+        self[date(year, 8, 15)] = name
+        
+        # Chuseok
+        name = "Chuseok"
+        for offset in range(-1, 2, 1):
+            ds = LunarDate(year + offset, 8, 15).toSolarDate()
+            if ds.year == year:
+                self[ds-timedelta(days=1)] = name
+                self[ds] = name
+                self[ds+timedelta(days=1)] = name
+
+        # National Foundation Day
+        name = "National Foundation Day"
+        self[date(year, 10, 3)] = name
+
+        # Hangul Day
+        name = "Hangul Day"
+        self[date(year, 10, 9)] = name
+
+        # Christmas
+        name = "Christmas"
+        self[date(year, 12, 25)] = name
+
+
+class KR(Korea):
+    pass
 ```
 
 ### Model Fitting
