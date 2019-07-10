@@ -23,7 +23,7 @@
 * [Pandas](kaggleLearn/pandas.ipynb)
 * [Python](kaggleLearn)
 ## MLStudy
-* [handson ML](MLStudy/handsonML)
+* [(..ing) handson ML](MLStudy/handsonML)
 * [KaggleKernel](MLStudy/kaggleKernel)
 * [paper](MLStudy/paper)
 ## Spark&Scala
