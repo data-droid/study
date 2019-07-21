@@ -6,7 +6,7 @@
 * [leetcode](Algorithms/leetcode)
 ## [BigData](Bigdata)
 * [todo] Hadoop
-* [(..ing) Hive](Bigdata/Hive)
+* [Hive](Bigdata/Hive)
 * [todo] Pig
 * [Hue](Bigdata/Hue/hue.ipynb)
 ## Python
