@@ -30,5 +30,5 @@
 * [scalaBasic](Spark%26Scala/scalaBasic)
 * [(..ing) SparkBasic](Spark%26Scala/sparkBasic)
 ## DB
-* [SQL](DB/analysisUsingSQL)
+* [(..ing) SQL](DB/analysisUsingSQL)
 
