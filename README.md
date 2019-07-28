@@ -5,7 +5,7 @@
   * [DataStructure](Algorithms/basic/DataStructure)
 * [leetcode](Algorithms/leetcode)
 ## [BigData](Bigdata)
-* [todo] Hadoop
+* [(..ing) Hadoop](Bigdata/Hadoop)
 * [Hive](Bigdata/Hive)
 * [todo] Pig
 * [Hue](Bigdata/Hue/hue.ipynb)
