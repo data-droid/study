@@ -162,36 +162,36 @@
         * Non DFS Used : 맵리듀스 임시파일, 작업 로그 등 데이터 노드에 저장된 블록데이터가 아닌 파일의 용량.
         * Xceivers : 현재 작업중인 블록의 개수
         * ```
-           $ hdfs dfsadmin -report
-           Configured Capacity: 165810782208 (154.42 GB)
-           Present Capacity: 152727556096 (142.24 GB)
-           DFS Remaining: 140297670656 (130.66 GB)
-           DFS Used: 12429885440 (11.58 GB)
-           DFS Used%: 8.14%
-           Under replicated blocks: 18861
-           Blocks with corrupt replicas: 0
-           Missing blocks: 0
-           Missing blocks (with replication factor 1): 0
+          $ hdfs dfsadmin -report
+          Configured Capacity: 165810782208 (154.42 GB)
+          Present Capacity: 152727556096 (142.24 GB)
+          DFS Remaining: 140297670656 (130.66 GB)
+          DFS Used: 12429885440 (11.58 GB)
+          DFS Used%: 8.14%
+          Under replicated blocks: 18861
+          Blocks with corrupt replicas: 0
+          Missing blocks: 0
+          Missing blocks (with replication factor 1): 0
 
-           Live datanodes (1):
+          Live datanodes (1):
 
-           Name: x.x.x.x:50010 (data_node)
-           Hostname: data_node
-           Decommission Status : Normal
-           Configured Capacity: 165810782208 (154.42 GB)
-           DFS Used: 12429885440 (11.58 GB)
-           Non DFS Used: 13083226112 (12.18 GB)
-           DFS Remaining: 140297670656 (130.66 GB)
-           DFS Used%: 7.50%
-           DFS Remaining%: 84.61%
-           Configured Cache Capacity: 0 (0 B)
-           Cache Used: 0 (0 B)
-           Cache Remaining: 0 (0 B)
-           Cache Used%: 100.00%
-           Cache Remaining%: 0.00%
-           Xceivers: 2
-           Last contact: Thu Apr 25 08:29:50 UTC 2019
-           ```
+          Name: x.x.x.x:50010 (data_node)
+          Hostname: data_node
+          Decommission Status : Normal
+          Configured Capacity: 165810782208 (154.42 GB)
+          DFS Used: 12429885440 (11.58 GB)
+          Non DFS Used: 13083226112 (12.18 GB)
+          DFS Remaining: 140297670656 (130.66 GB)
+          DFS Used%: 7.50%
+          DFS Remaining%: 84.61%
+          Configured Cache Capacity: 0 (0 B)
+          Cache Used: 0 (0 B)
+          Cache Remaining: 0 (0 B)
+          Cache Used%: 100.00%
+          Cache Remaining%: 0.00%
+          Xceivers: 2
+          Last contact: Thu Apr 25 08:29:50 UTC 2019
+          ```
     * -safemode
         * get : 세이프 모드 상태 확인
         * enter : 세이프 모드 진입
