@@ -62,7 +62,7 @@
 * 입력
     * InputFormat
         * InputSplit, RecordReader 선언
-        * ```java
+        ```java
         package org.apache.hadoop.mapreduce;
 
         @InterfaceAudience.Public
@@ -90,7 +90,7 @@
         * InputSplit
             * 맵의 입력으로 들어오는 데이터를 분할하는 방식.
             * 데이터의 위치와 읽어 들이는 길이 정의.
-            * ```java
+            ```java
                 package org.apache.hadoop.mapreduce;
 
                 @InterfaceAudience.Public
@@ -121,7 +121,7 @@
         * RecordReader
             * 실제 파일에 접근하여 데이터를 읽음.
             * 데이터를 읽어 <Key, Value>로 반환.
-            * ```java
+            ```java
             package org.apache.hadoop.mapreduce;
 
             import java.io.Closeable;
@@ -180,7 +180,7 @@
     * RecoderReader를 이용하여 데이터를 읽어 map(key,value)함수를 호출
     * 데이터를 모두 처리할때까지 반복.
     * cleanup() 메소드로 사용한 리소스 반환.
-```java
+    ```java
     package org.apache.hadoop.mapreduce;
 
     @InterfaceAudience.Public
@@ -231,7 +231,7 @@
             }
         }
     }
-```
+    ```
 
 * Combiner
     * 리듀스 작업 전달하기 전 정리하여 데이터 정송 자원 줄임.
@@ -242,7 +242,7 @@
 * Partitioner & Shuffle
     * Shuffle : 매퍼에서 리듀서로 데이터 전달하는 것
     * Partition : 맵의 결과 키를 리듀서로 분배하는 기준을 만드는 것
-```java
+    ```java
     package org.apache.hadoop.mapreduce.lib.partition;
 
     @InterfaceAudience.Public
@@ -255,7 +255,7 @@
         }
 
     }
-```
+    ```
     * 기본 파티셔너에서 `Interger.MAX_VALUE`값을 이용하여 논리합 연산을 하는 이유는 파티션 번호가 양수여야 하기 때문
     
 * Sort
@@ -272,72 +272,72 @@
     * setup() 메소드로 리듀스를 초기화. 
     * 데이터를 읽어서 `run(key, list<Value>)` 함수 호출
     * 반복 후 cleanup() 메소드로 사용한 리소스 반환
-```java
-package org.apache.hadoop.mapreduce;
+   ```java
+   package org.apache.hadoop.mapreduce;
 
-@Checkpointable
-@InterfaceAudience.Public
-@InterfaceStability.Stable
-public class Reducer<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
+   @Checkpointable
+   @InterfaceAudience.Public
+   @InterfaceStability.Stable
+   public class Reducer<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
 
-  /**
-   * The <code>Context</code> passed on to the {@link Reducer} implementations.
-   */
-  public abstract class Context 
-    implements ReduceContext<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
-  }
+     /**
+      * The <code>Context</code> passed on to the {@link Reducer} implementations.
+      */
+     public abstract class Context 
+       implements ReduceContext<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
+     }
 
-  /**
-   * Called once at the start of the task.
-   */
-  protected void setup(Context context
-                       ) throws IOException, InterruptedException {
-    // NOTHING
-  }
+     /**
+      * Called once at the start of the task.
+      */
+     protected void setup(Context context
+                          ) throws IOException, InterruptedException {
+       // NOTHING
+     }
 
-  /**
-   * This method is called once for each key. Most applications will define
-   * their reduce class by overriding this method. The default implementation
-   * is an identity function.
-   */
-  @SuppressWarnings("unchecked")
-  protected void reduce(KEYIN key, Iterable<VALUEIN> values, Context context
-                        ) throws IOException, InterruptedException {
-    for(VALUEIN value: values) {
-      context.write((KEYOUT) key, (VALUEOUT) value);
-    }
-  }
+     /**
+      * This method is called once for each key. Most applications will define
+      * their reduce class by overriding this method. The default implementation
+      * is an identity function.
+      */
+     @SuppressWarnings("unchecked")
+     protected void reduce(KEYIN key, Iterable<VALUEIN> values, Context context
+                           ) throws IOException, InterruptedException {
+       for(VALUEIN value: values) {
+         context.write((KEYOUT) key, (VALUEOUT) value);
+       }
+     }
 
-  /**
-   * Called once at the end of the task.
-   */
-  protected void cleanup(Context context
-                         ) throws IOException, InterruptedException {
-    // NOTHING
-  }
+     /**
+      * Called once at the end of the task.
+      */
+     protected void cleanup(Context context
+                            ) throws IOException, InterruptedException {
+       // NOTHING
+     }
 
-  /**
-   * Advanced application writers can use the 
-   * {@link #run(org.apache.hadoop.mapreduce.Reducer.Context)} method to
-   * control how the reduce task works.
-   */
-  public void run(Context context) throws IOException, InterruptedException {
-    setup(context);
-    try {
-      while (context.nextKey()) {
-        reduce(context.getCurrentKey(), context.getValues(), context);
-        // If a back up store is used, reset it
-        Iterator<VALUEIN> iter = context.getValues().iterator();
-        if(iter instanceof ReduceContext.ValueIterator) {
-          ((ReduceContext.ValueIterator<VALUEIN>)iter).resetBackupStore();        
-        }
-      }
-    } finally {
-      cleanup(context);
-    }
-  }
-}
-```
+     /**
+      * Advanced application writers can use the 
+      * {@link #run(org.apache.hadoop.mapreduce.Reducer.Context)} method to
+      * control how the reduce task works.
+      */
+     public void run(Context context) throws IOException, InterruptedException {
+       setup(context);
+       try {
+         while (context.nextKey()) {
+           reduce(context.getCurrentKey(), context.getValues(), context);
+           // If a back up store is used, reset it
+           Iterator<VALUEIN> iter = context.getValues().iterator();
+           if(iter instanceof ReduceContext.ValueIterator) {
+             ((ReduceContext.ValueIterator<VALUEIN>)iter).resetBackupStore();        
+           }
+         }
+       } finally {
+         cleanup(context);
+       }
+     }
+   }
+   ```
 
 # 출력
 * OutputFormat
