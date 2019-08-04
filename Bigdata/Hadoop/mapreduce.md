@@ -180,7 +180,7 @@
     * RecoderReader를 이용하여 데이터를 읽어 map(key,value)함수를 호출
     * 데이터를 모두 처리할때까지 반복.
     * cleanup() 메소드로 사용한 리소스 반환.
-    * ```java
+```java
     package org.apache.hadoop.mapreduce;
 
     @InterfaceAudience.Public
@@ -231,4 +231,135 @@
             }
         }
     }
+```
+
+* Combiner
+    * 리듀스 작업 전달하기 전 정리하여 데이터 정송 자원 줄임.
+    * 최대, 최소, 카운트 같은 함수는 가능.
+    * 평균 함수는 사용 불가.
+    * 컴바이너 함수를 리듀스 함수로 완전 대체 불가.
+
+* Partitioner & Shuffle
+    * Shuffle : 매퍼에서 리듀서로 데이터 전달하는 것
+    * Partition : 맵의 결과 키를 리듀서로 분배하는 기준을 만드는 것
+```java
+    package org.apache.hadoop.mapreduce.lib.partition;
+
+    @InterfaceAudience.Public
+    @InterfaceStability.Stable
+    public class HashPartitioner<K, V> extends Partitioner<K, V> {
+
+        /** Use {@link Object#hashCode()} to partition. */
+        public int getPartition(K key, V value, int numReduceTasks) {
+            return (key.hashCode() & Integer.MAX_VALUE) % numReduceTasks;
+        }
+
+    }
+```
+    * 기본 파티셔너에서 `Interger.MAX_VALUE`값을 이용하여 논리합 연산을 하는 이유는 파티션 번호가 양수여야 하기 때문
+    
+* Sort
+    * 리듀스 작업전 전달받은 키를 이용해 정렬
+    * 리듀스 작업을 위한 `List<Value>` 형태로 만들기 위한 그루핑 작업도 함께 수행
+    * 리듀스의 키와 다른 값을 함께 이용하는 복합키의 경우 파티셔닝, 소팅, 그룹핑 작업을 거치면서 복합키를 기준으로 정렬.
+    * ![](https://i.stack.imgur.com/l6IEl.png)
+    * 파티션 기준이 되는 Primary key외 다른 값을 기준으로 정렬 할 수 있음. (Secondary Sort)
+    
+* Reduce
+    * 키별로 정렬된 데이터를 이용하여 리듀스 작업 진행
+    * Reducer 클래스를 상속하고 reduce() 메소드를 구현하면 됨.
+    * run() 메소드를 보면 실제 매퍼 작업이 동작하는 방식 알 수 있음.
+    * setup() 메소드로 리듀스를 초기화. 
+    * 데이터를 읽어서 `run(key, list<Value>)` 함수 호출
+    * 반복 후 cleanup() 메소드로 사용한 리소스 반환
+```java
+package org.apache.hadoop.mapreduce;
+
+@Checkpointable
+@InterfaceAudience.Public
+@InterfaceStability.Stable
+public class Reducer<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
+
+  /**
+   * The <code>Context</code> passed on to the {@link Reducer} implementations.
+   */
+  public abstract class Context 
+    implements ReduceContext<KEYIN,VALUEIN,KEYOUT,VALUEOUT> {
+  }
+
+  /**
+   * Called once at the start of the task.
+   */
+  protected void setup(Context context
+                       ) throws IOException, InterruptedException {
+    // NOTHING
+  }
+
+  /**
+   * This method is called once for each key. Most applications will define
+   * their reduce class by overriding this method. The default implementation
+   * is an identity function.
+   */
+  @SuppressWarnings("unchecked")
+  protected void reduce(KEYIN key, Iterable<VALUEIN> values, Context context
+                        ) throws IOException, InterruptedException {
+    for(VALUEIN value: values) {
+      context.write((KEYOUT) key, (VALUEOUT) value);
+    }
+  }
+
+  /**
+   * Called once at the end of the task.
+   */
+  protected void cleanup(Context context
+                         ) throws IOException, InterruptedException {
+    // NOTHING
+  }
+
+  /**
+   * Advanced application writers can use the 
+   * {@link #run(org.apache.hadoop.mapreduce.Reducer.Context)} method to
+   * control how the reduce task works.
+   */
+  public void run(Context context) throws IOException, InterruptedException {
+    setup(context);
+    try {
+      while (context.nextKey()) {
+        reduce(context.getCurrentKey(), context.getValues(), context);
+        // If a back up store is used, reset it
+        Iterator<VALUEIN> iter = context.getValues().iterator();
+        if(iter instanceof ReduceContext.ValueIterator) {
+          ((ReduceContext.ValueIterator<VALUEIN>)iter).resetBackupStore();        
+        }
+      }
+    } finally {
+      cleanup(context);
+    }
+  }
+}
+```
+
+# 출력
+* OutputFormat
+    * Text, csv형식 등을 설정하고 파일을 쓰는 방법 설정
+    ```JAVA
+    import java.io.IOException;
+
+    @InterfaceAudience.Public
+    @InterfaceStability.Stable
+    public abstract class OutputFormat<K, V> {
+
+      public abstract RecordWriter<K, V> 
+        getRecordWriter(TaskAttemptContext context
+                        ) throws IOException, InterruptedException;
+
+      public abstract void checkOutputSpecs(JobContext context
+                                            ) throws IOException, 
+                                                     InterruptedException;
+
+      public abstract 
+      OutputCommitter getOutputCommitter(TaskAttemptContext context
+                                         ) throws IOException, InterruptedException;
+    }
     ```
+* RecordWriter
