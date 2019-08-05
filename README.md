@@ -8,7 +8,7 @@
 * [(..ing) Hadoop](Bigdata/Hadoop)
 * [Hive](Bigdata/Hive)
 * [todo] Pig
-* [Hue](Bigdata/Hue/hue.ipynb)
+* [Install](Bigdata/Install)
 ## Python
 * [DataScience](Python/DataScience)
 * [Jump2Python](Python/Jump2Python)
