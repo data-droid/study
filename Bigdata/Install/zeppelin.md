@@ -5,9 +5,9 @@
 * Downloads
     * version 0.8.1 download & 압축해제 & soft link
     ```bash
-$ wget http://mirror.apache-kr.org/zeppelin/zeppelin-0.8.1/zeppelin-0.8.1-bin-all.tgz
-$ tar -zxf zeppelin-0.8.1-bin-all.tgz
-$ ln -sf zeppelin-0.8.1-bin-all zeppelin
+   $ wget http://mirror.apache-kr.org/zeppelin/zeppelin-0.8.1/zeppelin-0.8.1-bin-all.tgz
+   $ tar -zxf zeppelin-0.8.1-bin-all.tgz
+   $ ln -sf zeppelin-0.8.1-bin-all zeppelin
     ```
    
 * Configure
