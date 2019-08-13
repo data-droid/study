@@ -157,7 +157,8 @@
         * vm.swappiness = 1 (kernel 버전 (2.6.32-303)부터 0은 기존 out-of-memory가 되지 않는 한 swap하지 않는다에서 모든 경우에 절대 안한다로 바뀜)
         * vm.dirty_background_ratio lower than 10 (0은 계속 flush page하기 때문에 하면 안됨) 
         * vm.dirty_ratio higher than 20 (60~80이 적당, I/O pause가 될 수 있으므로 replication이 꼭 필요함)
-        * ```text
+        * 
+        ```text
         vm.dirty_background_ratio = 5
         vm.dirty_ratio = 80
         vm.swappiness = 1
@@ -167,7 +168,8 @@
     * Disk
         * XFS > EXT4
         * noatime : access time이 지속적으로 쓰여지기 때문에 noatime하는 것이 좋음.
-        * ```text
+        * 
+        ```text
         tune2fs -m 0 -i 0 -c -1 /dev/device (waste space!)
         /dev/device       /mountpoint       ext4    defaults,noatime
         ```
