@@ -66,3 +66,5 @@
 * 실행
     * `./bin/zeppelin-daemon.sh start `
 
+* Hadoop, Spark 셋팅
+   * 
