@@ -67,4 +67,16 @@
     * `./bin/zeppelin-daemon.sh start `
 
 * Hadoop, Spark 셋팅
-   * 
+   * zeppelin-env.sh
+       * export MASTER=yarn-client
+       * export SPARK_HOME=스파크홈경로!
+       * export HADOOP_CONF_DIR=하둡설정경로!
+       * export HADOOP_HOME=하둡홈경로!
+       * export HADOOP_LIB_DIR=하둡LIB경로!
+       * 그 외 spark setting하고싶으면 해도됨!
+           * export SPARK_DRIVER_MEMORY
+           * export SPARK_EXECUTOR_INSTANCES
+   * interpreter 설정
+       * spark
+           * master = yarn-client
+           * spark.app.name = 스파크앱이름

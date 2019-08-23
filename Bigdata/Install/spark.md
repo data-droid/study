@@ -30,3 +30,27 @@ ln -sf spark-2.4.3-bin-hadoop2.7 spark
       * `cp conf/log4j.properties.template conf/log4j.properties`
     * 설정 변경
       * `log4j.rootCategory=INFO, console => log4j.rootCategory=WARN, console`
+
+## Hive 연동
+* hive-site.xml을 spark/conf로 이동하면 끝!
+    * 다만! hive를 tez를 이용하고 있었으면.. 에러가남 ㅠㅠ spark/conf에 있는 hive-site.xml의 hive.execution.engine을 mr로 바꾸면 잘됨!
+
+
+## Yarn 에서 돌리기!
+* issue 체크!
+    * yarn 2.7.3은 jersey 1을 spark2는 jersey 2를 사용하여 충돌 발생!
+        * spark-defaults.conf에서 spark.hadoop.yarn.timeline-service.enabled를 false 하여 처리하면 됨!
+* spark-defaults.conf
+    * spark.master yarn
+    * spark.driver.memory 원하는 크기
+    * spark.eventLog.dir hdfs://하둡/logs/spark/spark-events
+    * spark.eventLog.enabled true
+    * spark.executor.memory 원하는크기
+    * spark.history.fs.logDirectory hdfs://하둡/logs/spark/spark-events
+    * spark.home 스파크홈!
+    * spark.logConf true
+    * 그 외 옵셔널
+        * spark.serializer
+        * spark.executor.heartbeatInterval
+        * spark.network.timeout
+        * 등등 다양한 옵션 가능
