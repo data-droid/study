@@ -30,5 +30,7 @@
 * [scalaBasic](Spark%26Scala/scalaBasic)
 * [(..ing) SparkBasic](Spark%26Scala/sparkBasic)
 ## DB
-* [(..ing) SQL](DB/analysisUsingSQL)
+* [MySQL](DB/MySQLTips)
+* [NoSQL](DB/NoSQL)
+* [(..ing) SQL교육자료](DB/analysisUsingSQL)
 
