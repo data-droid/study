@@ -5,6 +5,7 @@
   * [DataStructure](Algorithms/basic/DataStructure)
 * [leetcode](Algorithms/leetcode)
 ## [BigData](Bigdata)
+* [ETC](Bigdata/etc)
 * [Hadoop](Bigdata/Hadoop)
 * [Hive](Bigdata/Hive)
 * [todo] Pig
