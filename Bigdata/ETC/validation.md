@@ -121,8 +121,7 @@
                    -resFile //저장경로
                    -nrFiles 6 //파일개수
                    -size 512MB //파일크기
-            ```
-
+              ```
 ### General Validation
 * TeraSort
     * 구성
@@ -132,19 +131,19 @@
             * Disk Test
                 * rep 1로 순수 disk performance 체크
                 * ```bash
-                yarn jar /path/to/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar\
-                    teragen -Ddfs.replication=1 -Ddfs.blocksize=536870912\
-                    -Dmapreduce.job.map=600 1100000000 /user/benchmarks/terasort-input
-                ```
+                      yarn jar /path/to/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar\
+                          teragen -Ddfs.replication=1 -Ddfs.blocksize=536870912\
+                          -Dmapreduce.job.map=600 1100000000 /user/benchmarks/terasort-input
+                  ```
                 * map은 datanode 총 디스크 수
                 * 평균 속도 대비 특정 disk가 적게 나오면 bad disk
             * Disk + Network Test
                 * rep 3으로 설정 으로 network traffic 추가 부하
                 * ```bash
-                yarn jar /path/to/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar\
-                    teragen -Ddfs.replication=3 -Ddfs.blocksize=536870912\
-                    -Dmapreduce.job.map=200 1100000000 /user/benchmarks/terasort-input
-                ```
+                      yarn jar /path/to/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar\
+                          teragen -Ddfs.replication=3 -Ddfs.blocksize=536870912\
+                          -Dmapreduce.job.map=200 1100000000 /user/benchmarks/terasort-input
+                  ```
                 * map은 datanode 총 디스크수 / 3 만큼
         * TeraSort 
             * Read, Write 테스트
