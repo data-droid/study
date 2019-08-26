@@ -62,14 +62,14 @@
             * Disk Sequential I/O Perfomance
                 * parallel I/O 스크립트 실행
                     * ```bash
-                    for n in $(seq 1 12); do
-                        num=$(print "%02d" $n)
-                        of="/disk${num}/ddtest"
-                        dd if=/dev/zero bs=1M count=1000 of=${of} conv=fdatasync 2>${of}.out &
-                        WAITPIDS="$WAITPIDS ${!}"
-                    done
-                    wait $WAITPIDS
-                    grep copied /disk??/ddtest.out
+                       for n in $(seq 1 12); do
+                           num=$(print "%02d" $n)
+                           of="/disk${num}/ddtest"
+                           dd if=/dev/zero bs=1M count=1000 of=${of} conv=fdatasync 2>${of}.out &
+                           WAITPIDS="$WAITPIDS ${!}"
+                       done
+                       wait $WAITPIDS
+                       grep copied /disk??/ddtest.out
                     ```
         * fio : Sequential/Random I/O 테스트, bandwidth/iops 측정
             * Sequential+Random I/O 측정 가능
@@ -113,14 +113,14 @@
                 * throughput, average, standard deviation check
                 * OS Page Cache 삭제!!
             * ```bash
-            MRLIB=/opt/cloudera/parcels/CDH/lib/hadoop-mapreduce
-            yarn jar ${MRLIB}/hadoop-mapreduce/hadoop-mapreduce-client-jobclient.jar \
-                TESTDFSIO\
-                -D test.build.data=/user/ian/benchmark\
-                -write\ //write,read,append
-                -resFile //저장경로
-                -nrFiles 6 //파일개수
-                -size 512MB //파일크기
+               MRLIB=/opt/cloudera/parcels/CDH/lib/hadoop-mapreduce
+               yarn jar ${MRLIB}/hadoop-mapreduce/hadoop-mapreduce-client-jobclient.jar \
+                   TESTDFSIO\
+                   -D test.build.data=/user/ian/benchmark\
+                   -write\ //write,read,append
+                   -resFile //저장경로
+                   -nrFiles 6 //파일개수
+                   -size 512MB //파일크기
             ```
 
 ### General Validation
