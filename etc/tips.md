@@ -18,3 +18,11 @@
                 * `conda activate 콘다환경이름`
             * ipykernel 재등록
                 * `python -m ipykernel install --user --name "콘다환경이름" --display-name "화면상 이름"`
+    * conda 사용중이였다면!
+        * 단순히 cp로 옮기면 홈의 로컬에 있는 환경들의 세부 path들이 이상해짐!
+        * 처리방법
+            * 기존 환경의 복제본 생성
+                * `conda create --name "new_환경" --clone "기존환경"`
+            * 기존 환경 삭제
+                * `conda env remove -n "기존환경"`
+            * 주피터 허브 사용중이였으면 위의 ipykernel 삭제 추가 과정 반복!
