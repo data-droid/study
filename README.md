@@ -34,6 +34,6 @@
 * [MySQL](DB/MySQLTips)
 * [NoSQL](DB/NoSQL)
 * [(..ing) SQL교육자료](DB/analysisUsingSQL)
-## ETC
+## [ETC](etc)
 * [통계](etc/statistics)
 
