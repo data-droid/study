@@ -1,6 +1,6 @@
 # study for data science
 ## Algorithms
-* basic
+* [basic](Algorithms/basic)
   * [Algorithms](Algorithms/basic/Algorithms)
   * [DataStructure](Algorithms/basic/DataStructure)
 * [leetcode](Algorithms/leetcode)
