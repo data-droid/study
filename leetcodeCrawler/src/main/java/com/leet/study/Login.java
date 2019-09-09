@@ -24,14 +24,10 @@ public class Login {
     private String passwd;
 
     public Login(String usrname, String passwd) {
-        this.usrname = null;
-        this.passwd = null;
-        okHttpHelerInstance = null;
-        csrftoken = null;
-        __cfduid = null;
+        LEETCODE_SESSION = null;
         this.usrname = usrname;
         this.passwd = passwd;
-        okHttpHelerInstance = OkHttpHelper.getSingleton();
+        okHttpHelerInstance = OkHttpHelper.getSingleton(true);
     }
 
 
@@ -42,9 +38,7 @@ public class Login {
                 .execute();
         csrftoken = response.cookie("csrftoken");
         __cfduid = response.cookie("__cfduid");
-        out.println(csrftoken +"\t"+ __cfduid);
 
-        out.println(okHttpHelerInstance);
         OkHttpClient client = okHttpHelerInstance.getOkHttpClient().newBuilder()
                 .followRedirects(false)
                 .followSslRedirects(false)
@@ -75,7 +69,6 @@ public class Login {
                 .build();
 
         Response loginResponse = okHttpHelerInstance.postSync(URL.LOGIN, requestBody, headers, client);
-        out.println(loginResponse.toString());
         headers = loginResponse.headers();
         List<String> cookies = headers.values("Set-Cookie");
         for (String cookie : cookies) {
@@ -85,8 +78,6 @@ public class Login {
                 LEETCODE_SESSION = cookie.substring("LEETCODE_SESSION".length() + 1, last);
             }
         }
-
-        out.println(cookies.toString());
         if (LEETCODE_SESSION != null) {
             success = true;
             out.println("Login Successfully");

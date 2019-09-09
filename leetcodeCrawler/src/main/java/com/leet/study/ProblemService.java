@@ -15,7 +15,7 @@ public class ProblemService {
     private OkHttpHelper okHttpHelperInstance;
 
     public ProblemService() {
-        okHttpHelperInstance = OkHttpHelper.getSingleton();
+        okHttpHelperInstance = OkHttpHelper.getSingleton(false);
     }
 
     public static ProblemService getSingleton() {
