@@ -23,8 +23,8 @@ public final class OkHttpHelper {
         gson = new Gson();
     }
 
-    public static OkHttpHelper getSingleton(boolean reLogin) {
-        if(reLogin==true) {
+    public static OkHttpHelper getSingleton(boolean reUse) {
+        if(reUse==true) {
             okHttpHelperInstance = new OkHttpHelper();
             return okHttpHelperInstance;
         }
