@@ -1,10 +1,61 @@
 # 데이터 분석 방법
 
+* 참고
+    * 광고 단가
+        * ![](https://blogfiles.pstatic.net/20150911_218/applift_1441965608556rWGly_PNG/Screen_Shot_2015-09-08_at_4.36.49_PM.png?type=w2)
+            * CPM (Cost Per Mille) : 광고 1,000번 노출 당 과금
+            * CPC (Cost Per Click) : 광고 클릭 당 과금
+            * CPI (Cost Per Install) : 설치당 과금
+            * CPA/CPE (Cost Per Action, Cost Per Engagement) : 앱/서비스 실행 및 행동에 대한 과금
+    * 광고 종류
+        * 배너 광고
+        * 인터스티셜 : 스크린 가득 채우는 광고
+        * 네이티브 광고 : 컨텐츠, 서비스 내에 자연스럽게 결합되어 있는 광고
+        * 비디오 광고
+        * 리치 미디어 : 형식에 제한 없는 광고 (게임, 동영상, 상호작용)
+        * 리타겟팅
+    * 그 외 용어
+        * Impression : 노출
+        * CTR (Click Through Rate) : 노출당 클릭률
+        * CR (Conversion Rate) : 전환율
+        * eCPM(effective Cost Per Mille) : 유효 1,000회 노출당 비용
+        * eCPI(effective Cost Per Install) : 유효 앱 설치당 비용
+    * 유저 관련 용어
+        * 진성유저 : 지속적으로 사용하는 유저
+        * DAU/MAU (Daily Active User / Monthly Active User) : 기간 별 사용자 수
+        * ARPU (Average Revenue Per User) : 유저 1인당 평균 매출
+        * LTV (Lifetime Value) : 고객 생애 가치. 유저가 사용하는 총 기간동안 지불하는 총액
+        * UAC (User Acquisition Cost) : 유저 확보 비용. 유저 한명을 확보하기까지 지불한 총비용
+
 ## ARPU (Average Revenue Per User)
+* 수익 전체를 가입자로 나눈 단위당 매출.
+* 1명의 사용자가 지불한 평균 금액.
+* 계산
+    * 일간 : 일매출 / DAU
+    * 월간 : 월매출 / MAU
+    
 
 ## ARPPU (Average Revenue Per Paid User)
+* ARPU와 달리 결제한 사용자로 나눈 단위당 매출
+* 계산
+    * 일간 : 일매출 / PU (Paid User) (일간 결제한 순수 사용자수)
+    * 월간 : 월매출 / PU (Paid User) (월간 결제한 순수 사용자수)
 
 ## LTV (Lifetime Value)
+![](https://newapplift-production.s3.amazonaws.com/comfy/cms/files/files/000/002/660/original/LTV_Formula.jpg)
+* 유저 생애 가치
+* CPI(Cost Per Install), 매출, ROI (Return on investment)와 같이 LTV도 수익성을 평가하는 지표
+* 정의
+    * 한명의 유저가 서비스에 진입하여 최종 이탈까지 생산해낸 가치
+* 계산
+    * ![](https://newapplift-production.s3.amazonaws.com/comfy/cms/files/files/000/002/660/original/LTV_Formula.jpg)
+        * 기간별 유저당 평균 수익 / 유저 이탈률
+        * ex) 한달동안 유저당 평균수익(ARPU)가 10,000이며, 이탈한 유저 비율(Churn)이 60%라면, LTV = 16666이라고 함.
+* 위를 통해 CPI 전략 및 예산을 얼마나 사용할지 등에 도움을 줌
+    * UA(User Acquistion)에 지출한 비용보다 새롭게 유입된 유저가 더 가치있는지.
+    * 장기적으로 ROI가 적정한지
+    * 유저 유입보다 리텐션에 집중해야 할 시점인지.
+
 
 ## AARRR (해적 지표)
 ![](http://www.wisetracker.co.kr/wp-content/uploads/2017/02/aarrr-1.png)
