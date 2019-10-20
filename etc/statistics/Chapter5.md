@@ -50,3 +50,30 @@
   * 결합 확률밀도함수
     * P(X,Y) = ∫∫f(x,y)dxdy
   * 조건부분포
+    * 조건부 확률질량함수
+      * p_Y|X(y|x) = p(x,y) / p_X(x)
+    * 조건부 확률밀도함수
+      * f_Y|X(y|x) = f(x,y) / f_X(x)
+    * 독립
+      * p(x,y) = p_X(x)p_Y(y)
+      * f(x,y) = f_X(x)f_Y(y)
+  * 기대값과 공분산
+    * 확률변수 X, Y의 함수인 h(X,Y)의 기대값 E[h(X,Y)]
+      * E(h(X,Y))
+        * 이산형 : ΣxΣy(h(x,y)p(x,y))
+        * 연속형 : ∫∫h(x,y)f(x,y)dxdy
+    * 확률변수 X,Y의 연관관계 척도인 공분산 Cov(X,Y)
+      * Cov(X,Y)
+        * Cov(X,Y) = E((X-E(X))(Y-E(Y)) = E(XY) - E(X)E(Y)
+    * 단위에 영향을 받지않는 상관계수 p(X,Y)
+      * p(X,Y)
+        * p(X,Y) = Corr(X,Y) = Cov(X,Y) / (Var(X)Var(Y))^(1/2)
+      * p(aX+b,cY+d) = p(X,Y)
+    * 독립이면
+      * E(XY) = E(X)E(Y)
+      * Cov(X,Y) = 0
+      * but p(x,y) = 0이라고 해서 독립인 것은 아님. 상관관계가 없다고 말해야함.
+    * aX +- bY
+      * E(aX +- bY) = aE(X) +- bE(Y)
+      * Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X,Y)
+      * X,Y가 독립이면 Var(X+Y) = Var(X) + Var(Y)
