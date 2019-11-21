@@ -201,3 +201,11 @@ class KR(Korea):
         * 아웃라이어 제거
     * 특정 cutoff(연말 등)에 예측률이 떨어질 경우
         * changepoint를 추가
+        
+## 팁!
+* Change Point에 대한 이해
+    * changepoint_range(default =0.8) 의미는 학습 데이터의 80%에 대해 25개의 균일한 지점을 Change Point 위치로 선언한다는 뜻!
+        * 3년치 데이터를 가지고 학습할 때 1095일의 80%인 876까지 Change Point가 그어지며, 25개에 대한 Change point 간 차이는 35일씩 난다.
+        * 즉, 나머지 20%에서의 변화에 대한 트랜드 변화는 없으며 예측하는 범위까지 트랜드가 유지 된다는 것.
+    * changepoint_prior_scale(default=0.05)를 이용해 높이면 overfitting되게 낮추면 underfitting되게 할 수 있음.
+    * changepoints을 넣어 사용자가 직접 정의 해줄 수 있음.
