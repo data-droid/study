@@ -26,3 +26,14 @@
             * 기존 환경 삭제
                 * `conda env remove -n "기존환경"`
             * 주피터 허브 사용중이였으면 위의 ipykernel 삭제 추가 과정 반복!
+            
+            
+## 서버 모니터링
+* dstat
+    * `dstat -t -p -c -m -d --disk-util -n`
+* sar
+    * `sar -interval 5`
+* pidstat
+    * 프로세스가 사용하는 리소스 사용률 
+    * N초 동안 특정 리소스 사용한 모든 프로세스와 해당 프로세스가 사용한 리소스양 체크!
+    * `pidstat -dl 5`
