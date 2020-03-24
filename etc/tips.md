@@ -28,7 +28,7 @@
             * 주피터 허브 사용중이였으면 위의 ipykernel 삭제 추가 과정 반복!
             
             
-## 서버 모니터링
+## 서버 모니터링 (..ing)
 * dstat
     * `dstat -t -p -c -m -d --disk-util -n`
 * sar
